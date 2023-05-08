@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Paul Heckmann</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/prism.css" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="../../scripts/prism.js"></script>
+</head>
+
+<body>
+    <header>
+    </header>
+    <div class="container">
+        <aside class="sidenav">
+            <nav>
+                <h3>Paul Heckmann</h3>
+                <h5>Data scientist in training</h5>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../Data_science.html">Data Science Projects</a></li>
+                    <li><a href="../About.html">About</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <section>
+                <h1>
+                    Project 2: Music Billboard 100 top-ten singles Audio Analysis
+                </h1>
+                <hr />
+                <img src="../images/project1_teaser.png" alt="Air temperature map Germany" width="500" height="auto">
+                <p>
+                    This project was inspired by a <a
+                        href="https://blog.streamlit.io/find-the-top-songs-from-your-high-school-years-with-a-streamlit-app/">blog
+                        post</a> by Robert Ritz. In the blog post, Robert Ritz describes how one can scrape the <a
+                        href="https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles">Billboard Hot 100
+                        top-ten singles</a> from wikipedia and utilise the Spotify
+                    API via <a href="https://spotipy.readthedocs.io/en/2.22.1/">spotipy</a> to build an app where the
+                    user can choose the years to receive the Spotify playlist link the the top songs of that years.
+                    In my project, I started to utilise the Ritz's scaping function to get a the data for the Billboard
+                    Hot 100 top-ten singles with the spotify (uris) to later be merge the list with audio analytic data
+                    from the spotify API via spotipy. The goal of the project is to see if through the last decates one
+                    can see a change in the polular key or beat-per-minute.
+                </p>
+                <pre>
+                    <code class="language-python">
+                        def median(pool):
+                        '''Statistical median to demonstrate doctest.
+                        >>> median([2, 9, 9, 7, 9, 2, 4, 5, 8])
+                        7
+                        '''
+                        copy = sorted(pool)
+                        size = len(copy)
+                        if size % 2 == 1:
+                            return copy[(size - 1) / 2]
+                        else:
+                            return (copy[size/2 - 1] + copy[size/2]) / 2
+                        if __name__ == '__main__':
+                        import doctest
+                        doctest.testmod()
+                    </code>
+                 </pre>
+            </section>
+        </main>
+        <footer>
+            <p>Copyright &copy; Paul Heckmann 2023.
+        </footer>
+</body>
+
+</html>
