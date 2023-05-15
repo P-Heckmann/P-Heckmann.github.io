@@ -24,12 +24,16 @@ header h1 {
 }
 
 nav {
-    background-color: lightblue;
+    background-color: rgb(17, 66, 82);
 
 }
 
 nav a:link {
     text-decoration: none;
+    text-align: center;
+    padding: 30px;
+    font-size: 25px;
+    font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
 }
 
 nav a:visited {
@@ -43,6 +47,7 @@ nav a:hover {
 nav a:active {
     text-decoration: none;
 }
+
 
 
 
@@ -85,7 +90,7 @@ section li {
     font-size: 14px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
     color: white;
-
+    display: list-item
 }
 
 
