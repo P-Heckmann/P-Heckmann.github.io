@@ -10,13 +10,41 @@ body {
 
 /* Style the header */
 header {
-    margin-left: 0px;
     background-color: #27282b;
-    padding: 0px;
-    text-align: center;
-    font-size: 35px;
     color: white;
 }
+
+header h1 {
+    background-color: #1b1b1e;
+    padding: 30px;
+    text-align: left;
+    font-size: 25px;
+    font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
+    color: white;
+}
+
+nav {
+    background-color: lightblue;
+
+}
+
+nav a:link {
+    text-decoration: none;
+}
+
+nav a:visited {
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: none;
+}
+
+nav a:active {
+    text-decoration: none;
+}
+
+
 
 li {
     display: inline;
@@ -50,6 +78,19 @@ section h2 {
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
     color: white;
 }
+
+section li {
+    margin-left: 0px;
+    background-color: #1b1b1e;
+    font-size: 14px;
+    font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
+    color: white;
+
+}
+
+
+
+
 
 /* Style page content */
 .main {
