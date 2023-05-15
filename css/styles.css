@@ -16,7 +16,7 @@ header {
 
 header h1 {
     background-color: #576CBC;
-    padding: 30px;
+    padding: 10px;
     text-align: center;
     font-size: 25px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
@@ -26,8 +26,8 @@ header h1 {
 nav {
     background-color: #19376D;
     text-align: center;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 nav a:link {
@@ -121,7 +121,7 @@ footer {
     width: 100%;
     margin-bottom: 0px;
     margin-left: 0px;
-    background-color: #27282b;
+    background-color: #576CBC;
     padding: 10px;
     color: white;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
