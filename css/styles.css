@@ -17,7 +17,7 @@ header {
 header h1 {
     background-color: #1b1b1e;
     padding: 30px;
-    text-align: left;
+    text-align: center;
     font-size: 25px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
     color: white;
@@ -25,7 +25,9 @@ header h1 {
 
 nav {
     background-color: rgb(17, 66, 82);
-
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 nav a:link {
@@ -38,6 +40,7 @@ nav a:link {
 
 nav a:visited {
     text-decoration: none;
+    color: rgb(146, 51, 141);
 }
 
 nav a:hover {
@@ -46,6 +49,7 @@ nav a:hover {
 
 nav a:active {
     text-decoration: none;
+    color: rgb(158, 92, 92);
 }
 
 
@@ -70,8 +74,9 @@ section {
 }
 
 section h1 {
-    background-color: #1b1b1e;
-    padding: 30px;
+    background-color: #570c51;
+    padding-left: 30px;
+    padding-bottom: 30px;
     text-align: left;
     font-size: 25px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
@@ -84,15 +89,21 @@ section h2 {
     color: white;
 }
 
+section p {
+    padding-left: 30px;
+
+}
+
 section li {
-    margin-left: 0px;
     background-color: #1b1b1e;
+    padding-left: 30px;
     font-size: 14px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
     color: white;
-    display: list-item
-}
+    display: list-item;
+    list-style-position: inside;
 
+}
 
 
 
