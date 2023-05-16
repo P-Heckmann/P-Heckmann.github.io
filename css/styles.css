@@ -3,12 +3,7 @@
     padding: 0;
 }
 
-body {
-    font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
-    color: #6d6d6d
-}
 
-/* Style the header */
 header {
     background-color: #27282b;
     color: white;
@@ -28,6 +23,14 @@ nav {
     text-align: center;
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+nav li {
+    display: inline;
+    font-size: 25px;
+    font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
+    color: #6d6d6d;
+    text-align: left;
 }
 
 nav a:link {
@@ -50,17 +53,6 @@ nav a:hover {
 nav a:active {
     text-decoration: none;
     color: rgb(158, 92, 92);
-}
-
-
-
-
-li {
-    display: inline;
-    font-size: 25px;
-    font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
-    color: #6d6d6d;
-    text-align: left;
 }
 
 section {
@@ -95,10 +87,10 @@ section p {
     text-justify: inter-word;
 }
 
-p {
-
-    text-align: justify;
+section a {
+    color: white;
 }
+
 
 
 
@@ -121,36 +113,15 @@ section li {
     padding-bottom: 30px;
 }
 
-/* Style page content */
-.main {
-    margin-left: 0px;
-    /* Same as the width of the sidebar */
-    padding: 0px 10px;
-}
 
-/* Style the footer */
 footer {
-    position: absolute;
     text-align: center;
     width: 100%;
     margin-bottom: 0px;
     margin-left: 0px;
     background-color: #576CBC;
-    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     color: white;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
-}
-
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
-
-a {
-    color: white;
 }
