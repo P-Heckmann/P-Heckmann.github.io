@@ -93,9 +93,14 @@ section p {
     padding-left: 30px;
     text-align: justify;
     text-justify: inter-word;
-
-
 }
+
+p {
+
+    text-align: justify;
+}
+
+
 
 section li {
     background-color: #0B2447;
@@ -112,6 +117,8 @@ section li {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 30px;
+    padding-bottom: 30px;
 }
 
 /* Style page content */
