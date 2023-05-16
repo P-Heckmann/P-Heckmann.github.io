@@ -38,6 +38,7 @@ nav a:link {
     padding: 30px;
     font-size: 25px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
+    color: white;
 }
 
 nav a:visited {
