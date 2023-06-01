@@ -13,43 +13,25 @@
     <header>
         <h1>Paul Heckmann - Data scientist</h1>
     </header>
-    <div class="container">
-        <aside class="sidenav">
-            <nav>
-                <ul>
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="../Data_science.html">Projects</a></li>
-                    <li><a href="../About.html">About</a></li>
-                </ul>
-            </nav>
-        </aside>
-        <main>
-            <section>
-                <h1>
-                    Project 1: Historical weather data analysis
-                </h1><br>
-                <h1>
-                    <a style="text-decoration:none"
-                        href="https://p-heckmann-weather-home-deploy-pwgt2l.streamlit.app/">Link
-                        to App</a>
-                </h1>
-                <hr />
-                <div class="image-container"><img src="../../images/project1_teaser.png"
-                        alt="Air temperature map Germany"></div>
-
-                <p>
-                    This streamlit app is based on publicly free available weather data from the <a
-                        href="https://www.dwd.de/EN/Home/home_node.html">German Meteorological
-                        Service</a> (Deutscher Wetterdienst) and a shapefile from the <a
-                        href="https://www.bkg.bund.de/DE/Home/home.html">German Federal Agency for Cartography and
-                        Geodesy</a> (Bundesamt für Kartographie und Geodäsie). It offers an interactive visualization of
-                    weather data from the different german states, in terms of air temperature, precipitation and
-                    sunshine duration. The main purpose of this project was to test the python libraries <a
-                        href="https://geopandas.org/en/stable/">geopandas</a> in combination
-                    with the visualization library <a href="https://matplotlib.org/">matplotlib</a> and <a
-                        href="https://streamlit.io/">streamlit</a>.
-                </p>
-                <pre>
+    <nav class="navbar">
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="../Data_science.html">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="../About.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <section>
+            <h1>
+                Historical weather data analysis
+            </h1><br>
+            <h2>
+                <a style="text-decoration:none"
+                    href="https://p-heckmann-weather-home-deploy-pwgt2l.streamlit.app/">Click here to go to the app</a>
+            </h2>
+            <hr />
+            <pre>
                     <code class="language-python">
                         def median(pool):
                         '''Statistical median to demonstrate doctest.
@@ -67,11 +49,11 @@
                         doctest.testmod()
                     </code>
                  </pre>
-            </section>
-        </main>
-        <footer>
-            <p>Copyright &copy; Paul Heckmann 2023.
-        </footer>
+        </section>
+    </main>
+    <footer>
+        <p>Copyright &copy; Paul Heckmann 2023.
+    </footer>
 </body>
 
 </html>

@@ -13,44 +13,27 @@
     <header>
         <h1>Paul Heckmann - Data scientist</h1>
     </header>
-    <div class="container">
-        <aside class="sidenav">
-            <nav>
-                <ul>
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="../Data_science.html">Projects</a></li>
-                    <li><a href="../About.html">About</a></li>
-                </ul>
-            </nav>
-        </aside>
-        <main>
-            <section>
-                <h1>
-                    Project 2: Music Billboard 100 top-ten singles Audio Analysis
-                </h1>
-                <br>
-                <h1>
-                    <a style="text-decoration:none"
-                        href="https://p-heckmann-spotify-home-deploy-qbxmxy.streamlit.app/">Link
-                        to App</a>
-                </h1>
-                <hr />
-                <div class="image-container"><img src="../../images/project1_teaser.png"
-                        alt="Air temperature map Germany"></div>
-                <p>
-                    This project was inspired by a <a
-                        href="https://blog.streamlit.io/find-the-top-songs-from-your-high-school-years-with-a-streamlit-app/">blog
-                        post</a> by Robert Ritz. In the blog post, Robert Ritz describes how one can scrape the <a
-                        href="https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles">Billboard Hot 100
-                        top-ten singles</a> from wikipedia and utilise the Spotify
-                    API via <a href="https://spotipy.readthedocs.io/en/2.22.1/">spotipy</a> to build an app where the
-                    user can choose the years to receive the Spotify playlist link the the top songs of that years.
-                    In my project, I started to utilise the Ritz's scaping function to get a the data for the Billboard
-                    Hot 100 top-ten singles with the spotify (uris) to later be merge the list with audio analytic data
-                    from the spotify API via spotipy. The goal of the project is to see if through the last decates one
-                    can see a change in the polular key or beat-per-minute.
-                </p>
-                <pre>
+    <nav class="navbar">
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="../Data_science.html">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="../About.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <section>
+            <h1>
+                Project 2: Music Billboard 100 top-ten singles Audio Analysis
+            </h1>
+            <br>
+            <h2>
+                <a style="text-decoration:none"
+                    href="https://p-heckmann-spotify-home-deploy-qbxmxy.streamlit.app/">Click here to go to the app</a>
+            </h2>
+
+            <hr />
+            <pre>
                     <code class="language-python">
                         def median(pool):
                         '''Statistical median to demonstrate doctest.
@@ -68,11 +51,11 @@
                         doctest.testmod()
                     </code>
                  </pre>
-            </section>
-        </main>
-        <footer>
-            <p>Copyright &copy; Paul Heckmann 2023.
-        </footer>
+        </section>
+    </main>
+    <footer>
+        <p>Copyright &copy; Paul Heckmann 2023.
+    </footer>
 </body>
 
 </html>
