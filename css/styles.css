@@ -188,6 +188,19 @@ footer {
     /* Ensures the image does not exceed its container's width */
 }
 
+.image-container2 {
+    text-align: center;
+    padding: 30px;
+    /* Optional: Centers the image horizontally */
+}
+
+.image-container2 img {
+    max-width: 100%;
+    background-color: #fff;
+    padding: 4px;
+    /* Ensures the image does not exceed its container's width */
+}
+
 @media (min-width: 768px) {
 
     /* Adjust the breakpoint value as needed */
@@ -200,5 +213,14 @@ footer {
 @media (max-width: 768px) {
     .centered-text {
         width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+
+    /* Adjust the breakpoint value as needed */
+    .image-container2 img {
+        width: 25%;
+        /* On desktop devices, set the image width to 50% */
     }
 }
