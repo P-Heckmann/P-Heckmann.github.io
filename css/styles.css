@@ -55,7 +55,7 @@ nav a:active {
     color: rgb(158, 92, 92);
 }
 
-.container {
+.containerbackground {
     position: relative;
     background-image: url('../images/background.jpeg');
     background-size: cover;
@@ -104,25 +104,28 @@ section h1 {
     text-align: center;
     font-size: 25px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
-    color: white;
+
 }
 
 section h2 {
     font-size: 15px;
     padding-bottom: 30px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
-    color: rgb(255, 0, 0);
+    color: white;
 }
 
 section h3 {
     font-size: 18px;
+    padding-bottom: 10px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
     color: white;
 }
 
 section p {
+    width: 50%;
     text-align: center;
     text-justify: inter-word;
+
 }
 
 section a {
@@ -148,6 +151,16 @@ section li {
     padding-bottom: 30px;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.centered-text {
+    width: 50%;
+    text-align: center;
+}
+
 
 footer {
     position: absolute;
@@ -170,6 +183,8 @@ footer {
 
 .image-container img {
     max-width: 100%;
+    background-color: #fff;
+    padding: 4px;
     /* Ensures the image does not exceed its container's width */
 }
 
