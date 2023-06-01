@@ -156,3 +156,10 @@ footer {
     color: white;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
 }
+
+img {
+    width: 25%;
+    height: 25%;
+    object-fit: cover;
+    object-position: bottom;
+}
