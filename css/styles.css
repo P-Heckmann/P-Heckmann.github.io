@@ -156,3 +156,22 @@ footer {
     color: white;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
 }
+
+.image-container {
+    text-align: left;
+    /* Optional: Centers the image horizontally */
+}
+
+.image-container img {
+    max-width: 100%;
+    /* Ensures the image does not exceed its container's width */
+}
+
+@media (min-width: 768px) {
+
+    /* Adjust the breakpoint value as needed */
+    .image-container img {
+        width: 50%;
+        /* On desktop devices, set the image width to 50% */
+    }
+}
