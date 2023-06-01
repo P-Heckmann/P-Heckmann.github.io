@@ -157,7 +157,7 @@ section li {
 }
 
 .centered-text {
-    width: 100%;
+    width: 50%;
     text-align: center;
 }
 
@@ -197,6 +197,6 @@ footer {
     }
 
     .centered-text {
-        width: 50%;
+        width: 100%;
     }
 }
