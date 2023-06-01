@@ -195,7 +195,9 @@ footer {
         width: 50%;
         /* On desktop devices, set the image width to 50% */
     }
+}
 
+@media (max-width: 768px) {
     .centered-text {
         width: 100%;
     }
