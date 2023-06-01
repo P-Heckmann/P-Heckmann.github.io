@@ -84,7 +84,7 @@ nav a:active {
 
 .content p {
     font-size: 16px;
-    text-align: left;
+    text-align: center;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
 }
 
@@ -92,7 +92,7 @@ section {
     margin-left: 0px;
     background-color: #0B2447;
     padding: 30px;
-    text-align: left;
+    text-align: center;
     font-size: 14px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
     color: white;
@@ -100,23 +100,28 @@ section {
 
 section h1 {
     background-color: #0B2447;
-    padding-left: 30px;
     padding-bottom: 30px;
-    text-align: left;
+    text-align: center;
     font-size: 25px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
     color: white;
 }
 
 section h2 {
-    font-size: 25px;
+    font-size: 15px;
+    padding-bottom: 30px;
+    font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
+    color: rgb(255, 0, 0);
+}
+
+section h3 {
+    font-size: 18px;
     font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
     color: white;
 }
 
 section p {
-    padding-left: 30px;
-    text-align: justify;
+    text-align: center;
     text-justify: inter-word;
 }
 
@@ -158,7 +163,8 @@ footer {
 }
 
 .image-container {
-    text-align: left;
+    text-align: center;
+    padding: 30px;
     /* Optional: Centers the image horizontally */
 }
 
