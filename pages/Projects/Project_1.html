@@ -32,26 +32,40 @@
             </h2>
             <hr />
             <p>The raw data for this project are 36 semicolon separated text files containing the temperature,
-                precipitation and sunshine duration for each month of the years 1881 to 2022.
+                precipitation and sunshine duration for each month of the years 1881 to 2022. In a first step, the
+                individual text files were merged into one file for each metric (temperature,
+                precipitation and sunshine duration) with the following function:
             </p>
-            <p>In a first step, the individual text files were merged into one file for each metric (temperature,
-                precipitation and sunshine duration) with the following function:</p>
             <pre>
                     <code class="language-python">
-                        def median(pool):
-                        '''Statistical median to demonstrate doctest.
-                        >>> median([2, 9, 9, 7, 9, 2, 4, 5, 8])
-                        7
-                        '''
-                        copy = sorted(pool)
-                        size = len(copy)
-                        if size % 2 == 1:
-                            return copy[(size - 1) / 2]
-                        else:
-                            return (copy[size/2 - 1] + copy[size/2]) / 2
-                        if __name__ == '__main__':
-                        import doctest
-                        doctest.testmod()
+                        def merge_textfiles(directory_path, name="merged.txt"):
+    """
+    Merges multiple text files into one and saves the merged content.
+
+    Args:
+        directory_path (str): The path to the directory containing the text files.
+        name (str, optional): The name of the merged file to be saved. Defaults to 'merged.txt'.
+    """
+    # Create an empty string to store the merged data
+    merged_data = ""
+
+    # Loop through all files in the directory
+    for i, filename in enumerate(os.listdir(directory_path)):
+        if filename.endswith(".txt"):
+            # Open the text file and read its contents
+            with open(os.path.join(directory_path, filename), "r") as file:
+                # Skip the first line (header) for all files except the first one
+                if i > 0:
+                    file_contents = file.readlines()[1:]
+                else:
+                    file_contents = file.readlines()
+
+            # Add the contents to the merged_data string with a semicolon separator
+            merged_data += "".join(file_contents).strip() + ";"
+
+    # Save the merged data to a file
+    with open(os.path.join(directory_path, name), "w") as file:
+        file.write(merged_data)
                     </code>
                  </pre>
             <p>
