@@ -31,26 +31,548 @@
                 <a style="text-decoration:none"
                     href="https://p-heckmann-spotify-home-deploy-qbxmxy.streamlit.app/">Click here to go to the app</a>
             </h2>
-
+            <h2>
+                <a style="text-decoration:none" href="https://github.com/P-Heckmann/Spotify/">Click here to go to the
+                    github repository</a>
+            </h2>
             <hr />
+            <h1>
+                Wiki scarping
+            </h1>
+            <div class="container">
+                <p class="centered-text">
+                    test test test
+                </p>
+            </div>
             <pre>
                     <code class="language-python">
-                        def median(pool):
-                        '''Statistical median to demonstrate doctest.
-                        >>> median([2, 9, 9, 7, 9, 2, 4, 5, 8])
-                        7
-                        '''
-                        copy = sorted(pool)
-                        size = len(copy)
-                        if size % 2 == 1:
-                            return copy[(size - 1) / 2]
-                        else:
-                            return (copy[size/2 - 1] + copy[size/2]) / 2
-                        if __name__ == '__main__':
-                        import doctest
-                        doctest.testmod()
-                    </code>
+import pandas
+# Define a list to store the URLs of Wikipedia pages
+urls = []
+for year in range(1958, 2023):
+    urls.append(
+        f"https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_{year}"
+    )
+
+# Create an empty list to store rows of data
+rows = []
+for url, year in zip(urls, range(1958, 2023)):
+    print(year)
+    
+    # Read HTML tables from the Wikipedia page
+    dfs = pd.read_html(url)
+
+    # Find the table with the maximum number of rows
+    row_num = []
+    for df in dfs:
+        row_num.append(df.shape[0])
+
+    year_df = dfs[row_num.index(max(row_num))]
+    year_df = year_df.iloc[:, :6]
+
+    # Rename the columns of the selected table
+    columns = ["entry_date", "title", "artist", "peak", "peak_date", "weeks_top_ten"]
+    year_df.columns = columns
+
+    # Filter out rows where the "peak" column cannot be converted to numeric values
+    year_df = year_df[
+        ~pd.to_numeric(year_df["peak"], errors="coerce").isna()
+    ].reset_index(drop=True)
+
+    # Add a new column for the year
+    year_df["year"] = year
+    
+    # Append the rows of the selected table to the list
+    rows.extend(year_df.to_dict(orient="records"))
+
+# Create a DataFrame from the list of rows
+df = pd.DataFrame(rows)
+
+# Define a list of characters to be replaced in the "title" column
+to_replace = ["/", "\\\\", "(", ")", "'", ":", "."]
+
+# Replace characters in the "title" column
+for item in to_replace:
+    df["title"] = df["title"].str.replace(item, "", regex=False)
+
+# Save the DataFrame as a pickle file named "hot_100.pkl"
+df.to_pickle(r"./data/hot_100.pkl")</code>
                  </pre>
+            <hr />
+            <h1>
+                Spotify add uri
+            </h1>
+            <div class="container">
+                <p class="centered-text">
+                    The raw data for this project are 36 semicolon separated text files containing the temperature,
+                    precipitation and sunshine duration for each month of the years 1881 to 2022. In a first step, the
+                    individual text files were merged into one file for each metric (temperature,
+                    precipitation and sunshine duration) with the following function:
+                </p>
+            </div>
+            <pre>
+                         <code class="language-python">
+import pandas as pd
+import numpy as np
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+import os
+
+# Set the required environment variables for Spotify API authentication
+os.environ["SPOTIPY_CLIENT_ID"] = "54b3ffcb9b85494aa3ca79a540013c94"
+os.environ["SPOTIPY_CLIENT_SECRET"] = "68d913a2f09f4086ab7ab1244816d99b"
+os.environ["SPOTIPY_REDIRECT_URI"] = "http://localhost:8080"
+
+# Initialize the Spotify API client
+spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
+
+# Read the pickle file "hot_100.pkl" into a DataFrame
+df = pd.read_pickle(".\data\hot_100.pkl")
+
+# Convert the DataFrame to a list of dictionaries
+list_df = df.to_dict(orient="records")
+
+# Iterate over each item in the list and query the Spotify API for track information
+for item in list_df:
+    try:
+        # Search for a track based on the item's title and artist using the Spotify API
+        result = spotify.search(
+            f"""track:{item['title']} artist:{item['artist']}""", type="track", limit=1
+        )
+        if len(result["tracks"]["items"]) > 0:
+            # Store the URI of the first track in the search result
+            item["spotify_uri"] = result["tracks"]["items"][0]["uri"]
+        else:
+            # If no track is found, set the URI as NaN
+            item["spotify_uri"] = np.nan
+    except spotipy.client.SpotifyException as e:
+        # If an exception occurs, store the exception details in the URI
+        item["spotify_uri"] = str(e.http_status) + " - " + e.msg
+
+# Create a new DataFrame from the updated list of dictionaries
+df = pd.DataFrame(list_df)
+
+# Drop rows with NaN values in the "spotify_uri" column
+df = df.dropna()
+
+# Filter out rows where the "spotify_uri" column contains the string "Not found"
+df = df[~df["spotify_uri"].str.contains("Not found")]
+
+# Save the DataFrame as a pickle file named "songs2.pkl"
+df.to_pickle(r"./data/songs.pkl")</code>
+                      </pre>
+            <hr />
+            <h1>
+                Merge files
+            </h1>
+            <div class="container">
+                <p class="centered-text">
+                    The raw data for this project are 36 semicolon separated text files containing the temperature,
+                    precipitation and sunshine duration for each month of the years 1881 to 2022. In a first step, the
+                    individual text files were merged into one file for each metric (temperature,
+                    precipitation and sunshine duration) with the following function:
+                </p>
+            </div>
+            <pre>
+                              <code class="language-python">
+import pandas as pd
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+
+# Set up the client credentials for Spotify API authentication
+client_credentials_manager = SpotifyClientCredentials(
+    client_id="54b3ffcb9b85494aa3ca79a540013c94",
+    client_secret="68d913a2f09f4086ab7ab1244816d99b",
+)
+
+# Create a Spotify API client
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+# Read the DataFrame from a pickle file
+df = pd.read_pickle("./data/songs.pkl")
+
+# Define a function to get audio features for a list of track URIs
+def get_audio_features(uris):
+    features_list = []
+    for uri in uris:
+        # Get the audio features for each track URI
+        features = sp.audio_features(uri)
+        features_list.append(features[0])
+    return features_list
+
+# Call the get_audio_features function to retrieve audio features for the track URIs in the DataFrame
+audio_features = get_audio_features(df["spotify_uri"].tolist())
+
+# Filter out any invalid entries from the audio features list
+data = [i for i in audio_features if i is not None]
+
+# Convert the list of audio features into a DataFrame
+audio_features_df = pd.DataFrame(data)
+
+# Rename the "uri" column to "spotify_uri"
+audio_features_df = audio_features_df.rename(columns={"uri": "spotify_uri"})
+
+# Merge the original DataFrame with the audio features DataFrame based on the "spotify_uri" column
+merged_df = pd.merge(df, audio_features_df, on="spotify_uri", how="left")
+
+# Drop any rows with missing values
+merged_df = merged_df.dropna()
+
+# Save the merged DataFrame as a pickle file named "merged_df.pkl"
+merged_df.to_pickle(r"./data/merged_df.pkl")</code>
+</pre>
+            <hr />
+            <h1>
+                Overview
+            </h1>
+            <div class="container">
+                <p class="centered-text">
+                    The raw data for this project are 36 semicolon separated text files containing the temperature,
+                    precipitation and sunshine duration for each month of the years 1881 to 2022. In a first step, the
+                    individual text files were merged into one file for each metric (temperature,
+                    precipitation and sunshine duration) with the following function:
+                </p>
+            </div>
+            <pre>
+        <code class="language-python">
+import streamlit as st
+import pandas as pd
+import altair as alt
+
+path = "./data/merged_df.pkl"
+
+path_local = r"C:\Users\paulh\Desktop\Spotify\data\merged_df.pkl"
+
+df = pd.read_pickle(path)
+
+st.write("### Welcome to the Billboard analyser")
+st.markdown("""---""")
+
+NUMBER_OF_ENTRIES = len(df)
+FIRST_YEAR = df["year"].min()
+LAST_YEAR = 2021
+
+KEY = '"The key the track is in. Integers map to pitches using standard Pitch Class notation. E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on. If no key was detected, the value is -1 (Spotify API)."'
+
+TEMPO = '"The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration (Spotify API)."'
+
+DANCEABLITY = '"Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable (Spotify API). "'
+
+SPEECHINESS = '"Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks (Spotify API)."'
+
+INSTRUMENTALNESS = '"Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0 (Spotify API)."'
+
+LIVENESS = '"Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live (Spotify API)."'
+
+VALENCE = '"A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry)(Spotify API)."'</code>
+
+            </pre>
+            <hr />
+            <h1>
+                Plotting
+            </h1>
+            <div class="container">
+                <p class="centered-text">
+                    The raw data for this project are 36 semicolon separated text files containing the temperature,
+                    precipitation and sunshine duration for each month of the years 1881 to 2022. In a first step, the
+                    individual text files were merged into one file for each metric (temperature,
+                    precipitation and sunshine duration) with the following function:
+                </p>
+            </div>
+            <pre>
+                <code class="language-python">
+st.write(f"#### Number of songs: {NUMBER_OF_ENTRIES}")
+st.write(f"#### From {FIRST_YEAR} to {LAST_YEAR}")
+st.markdown("""---""") 
+
+chart = alt.Chart(df).mark_bar().encode(
+    alt.X('year:O', bin=alt.Bin(step=1), title='Year'),
+    alt.Y('count()', title='Frequency')
+).interactive()
+
+st.altair_chart(chart, use_container_width=True)
+
+# Define a dictionary to map numerical data to string data
+mapping = {0: 'C',
+           1: 'C♯',
+           2: 'D',
+           3: 'D♯',
+           4: 'E',
+           5: 'F',
+           6: 'F♯',
+           7: 'G',
+           8: 'G#',
+           9: 'A',
+           10: 'A#',
+           11: 'B',
+           }
+
+# Replace numerical data in column 'A' with string data using the mapping dictionary
+df['key'] = df['key'].replace(mapping)
+
+df['duration_m'] = df['duration_ms'] / 60000
+
+df['time_signature'] = df['time_signature'].astype(int)
+
+st.markdown("""---""")
+st.write(f"#### Key")
+st.write(f"###### {KEY}")
+
+chart = alt.Chart(df).mark_bar().encode(
+    alt.X('key:O', title='Key'),
+    alt.Y('count()', title='Frequency')
+).interactive()
+
+st.altair_chart(chart, use_container_width=True)
+
+st.markdown("""---""")
+st.write(f"#### Tempo")
+st.write(f"###### {TEMPO}")
+
+x_range = (50,220)
+chart = alt.Chart(df).mark_bar().encode(
+    alt.X('tempo',bin=alt.Bin(step=10),scale=alt.Scale(domain=x_range),  title='Beats per minute'),
+    alt.Y('count()', title='Frequency')
+).interactive()
+
+st.altair_chart(chart, use_container_width=True)
+
+metrics = ["danceability","speechiness","instrumentalness",
+           "liveness","valence"]
+
+metrics_name = ["Danceability","Speechiness","Instrumentalness",
+           "Liveness","Valence"]
+
+info_list = [DANCEABLITY,SPEECHINESS, INSTRUMENTALNESS, LIVENESS, VALENCE]
+
+for metric, name, info in zip(metrics,metrics_name,info_list):
+    st.write(f"#### {name}")
+    st.write(f"###### {info}")
+    
+    chart = alt.Chart(df).mark_bar().encode(
+    alt.X(metric,bin=alt.Bin(step=0.10), title=name),
+    alt.Y('count()', title='Frequency')
+    ).interactive()
+    st.altair_chart(chart, use_container_width=True)
+    
+st.markdown("""---""")
+st.write(f"#### Duration in minutes")
+
+x_range2 = (1,8)
+
+chart = alt.Chart(df).mark_bar().encode(
+    alt.X('duration_m', bin=alt.Bin(step=1),scale=alt.Scale(domain=x_range2), title='Minutes'),
+    alt.Y('count()', title='Frequency')
+).interactive()
+st.altair_chart(chart, use_container_width=True)</code>
+</pre>
+            <hr />
+            <h1>
+                History
+            </h1>
+            <div class="container">
+                <p class="centered-text">
+                    The raw data for this project are 36 semicolon separated text files containing the temperature,
+                    precipitation and sunshine duration for each month of the years 1881 to 2022. In a first step, the
+                    individual text files were merged into one file for each metric (temperature,
+                    precipitation and sunshine duration) with the following function:
+                </p>
+            </div>
+            <pre>
+                        <code class="language-python">
+import streamlit as st
+import pandas as pd
+import altair as alt
+import pandas as pd
+import matplotlib.pyplot as plt
+
+path = "./data/merged_df.pkl"
+
+path_local = r"C:\Users\paulh\Desktop\Spotify\data\merged_df.pkl"
+
+df = pd.read_pickle(path)
+
+st.write("### Metrics per year")
+st.markdown("""---""")
+
+df["year"] = df["year"].astype(int)
+
+# Convert the 'date' column to datetime
+df["date"] = pd.to_datetime(df["year"], format="%Y")
+
+# Define a dictionary to map numerical data to string data
+mapping = {
+    0: "C",
+    1: "C♯",
+    2: "D",
+    3: "D♯",
+    4: "E",
+    5: "F",
+    6: "F♯",
+    7: "G",
+    8: "G#",
+    9: "A",
+    10: "A#",
+    11: "B",
+}
+
+# Replace numerical data in column 'A' with string data using the mapping dictionary
+df["Key"] = df["key"].replace(mapping)
+
+# Define the bin edges
+tempo_bins = [0, 80, 90, 100, 110, 120, 130, 140, 160, 300]
+
+# Define the bin labels
+tempo_labels = [
+    "0-80 BPM",
+    "80-90 BPM",
+    "90-100 BPM",
+    "100-110 BPM",
+    "110-120 BPM ",
+    "120-130 BPM",
+    "130-140 BPM",
+    "140-160 BPM",
+    "160-250 BPM",
+]
+
+other_bins = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+
+other_labels = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1"]
+
+df["Tempo"] = pd.cut(df["tempo"], bins=tempo_bins, labels=tempo_labels)
+df["Danceability"] = pd.cut(df["danceability"], bins=other_bins, labels=other_labels)
+df["Speechiness"] = pd.cut(df["speechiness"], bins=other_bins, labels=other_labels)
+df["Instrumentalness"] = pd.cut(df["instrumentalness"], bins=other_bins, labels=other_labels)
+df["Liveness"] = pd.cut(df["liveness"], bins=other_bins, labels=other_labels)
+df["Valence"] = pd.cut(df["valence"], bins=other_bins, labels=other_labels)
+
+KEY = '"The key the track is in. Integers map to pitches using standard Pitch Class notation. E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on. If no key was detected, the value is -1 (Spotify API)."'
+
+TEMPO = '"The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration (Spotify API)."'
+
+DANCEABLITY = '"Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable (Spotify API). "'
+
+SPEECHINESS = '"Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks (Spotify API)."'
+
+INSTRUMENTALNESS = '"Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0 (Spotify API)."'
+
+LIVENESS = '"Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live (Spotify API)."'
+
+VALENCE = '"A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry)(Spotify API)."'
+
+metrics = [
+    "Key",
+    "Tempo",
+    "Danceability",
+"Speechiness","Instrumentalness", "Liveness","Valence"]
+
+selected_metric = st.radio("Select a metric:", metrics)
+
+
+# Group the DataFrame by 'Name' and 'Year' and count the occurrences
+counts = df.groupby([selected_metric, "year"]).size().reset_index(name="Count")
+# Pivot the counts DataFrame to have names as columns and years as index
+pivoted = counts.pivot(index="year", columns=selected_metric, values="Count")
+pivoted = pivoted.reset_index(drop=False)
+# df = pivoted.reset_index()
+# Melt the data to long format
+
+melted_data = pd.melt(
+    pivoted, id_vars="year", var_name=selected_metric, value_name="Count"
+)
+melted_data = melted_data.dropna()
+
+
+if selected_metric == "Key":
+    st.write("#### Key")
+    st.write(f"###### {KEY}")
+elif selected_metric == "Tempo":
+    st.write("#### Tempo")
+    st.write(f"###### {TEMPO}")
+elif selected_metric == "Danceability":
+    st.write("#### Danceability")
+    st.write(f"###### {DANCEABLITY}")
+elif selected_metric == "Speechiness":
+    st.write("#### Speechiness")
+    st.write(f"###### {SPEECHINESS}")
+elif selected_metric == "Instrumentalness":
+    st.write("#### Instrumentalness")
+    st.write(f"###### {INSTRUMENTALNESS}")
+elif selected_metric == "Liveness":
+    st.write("#### Liveness")
+    st.write(f"###### {LIVENESS}")
+elif selected_metric == "Valence":
+    st.write("#### Valence")
+    st.write(f"###### {VALENCE}")</code>
+                           </pre>
+            <hr />
+            <h1>
+                Plotting
+            </h1>
+            <div class="container">
+                <p class="centered-text">
+                    The raw data for this project are 36 semicolon separated text files containing the temperature,
+                    precipitation and sunshine duration for each month of the years 1881 to 2022. In a first step, the
+                    individual text files were merged into one file for each metric (temperature,
+                    precipitation and sunshine duration) with the following function:
+                </p>
+            </div>
+            <pre>
+                                       <code class="language-python">
+# Create the stacked bar plot using Altair
+chart = (
+    alt.Chart(melted_data)
+    .mark_bar()
+    .encode(x=alt.X("year:O", title=""),
+            y=alt.X("Count:Q"),
+            color=selected_metric)
+    .interactive()
+)
+
+# Specify the order of the legend
+
+if selected_metric == "Tempo":
+    custom_sort_order = tempo_labels
+    chart = chart.encode(
+        color=alt.Color(
+            "Tempo:N", sort=custom_sort_order, legend=alt.Legend(title="Tempo")
+        ),
+    )
+
+st.altair_chart(chart, use_container_width=True)
+st.markdown("""---""")
+
+melted_data["Normalized_count"] = melted_data.groupby("year")["Count"].apply(
+    lambda x: x / x.sum()
+)
+chart = (
+    alt.Chart(melted_data)
+    .mark_bar()
+    .encode(x=alt.X("year:O", title=""),
+            y=alt.Y("Normalized_count:Q"),
+            color=selected_metric)
+    .interactive()
+)
+
+if selected_metric == "Tempo":
+    custom_sort_order = tempo_labels
+    chart = chart.encode(
+        color=alt.Color(
+            "Tempo:N", sort=custom_sort_order, legend=alt.Legend(title="Tempo")
+        ),
+    )
+elif selected_metric == "Danceability":
+    custom_sort_order = other_labels
+    chart = chart.encode(
+        color=alt.Color(
+            "Danceability:N",
+            sort=custom_sort_order,
+            legend=alt.Legend(title="Danceability"),
+        ),
+    )
+
+st.altair_chart(chart, use_container_width=True)</code>
+                                          </pre>
         </section>
     </main>
     <footer>
