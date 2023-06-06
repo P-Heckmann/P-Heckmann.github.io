@@ -31,150 +31,372 @@
                 <a style="text-decoration:none"
                     href="https://p-heckmann-weather-home-deploy-pwgt2l.streamlit.app/">Click here to go to the app</a>
             </h2>
+            <h2>
+                <a style="text-decoration:none" href="https://github.com/P-Heckmann/Weather/">Click here to go to the
+                    github repository</a>
+            </h2>
             <hr />
-            <p>The raw data for this project are 36 semicolon separated text files containing the temperature,
-                precipitation and sunshine duration for each month of the years 1881 to 2022. In a first step, the
-                individual text files were merged into one file for each metric (temperature,
-                precipitation and sunshine duration) with the following function:
-            </p>
+            <h1>
+                Data preprocessing
+            </h1>
+            <div class="container">
+                <p class="centered-text">
+                    The raw data for this project are 36 semicolon separated text files containing the temperature,
+                    precipitation and sunshine duration for each month of the years 1881 to 2022. In a first step, the
+                    individual text files were merged into one file for each metric (temperature,
+                    precipitation and sunshine duration) with the following function:
+                </p>
+            </div>
             <pre>
                     <code class="language-python">
-    def merge_textfiles(directory_path, name="merged.txt"):
-    """
-    Merges multiple text files into one and saves the merged content.
-
-    Args:
-        directory_path (str): The path to the directory containing the text files.
-        name (str, optional): The name of the merged file to be saved. Defaults to 'merged.txt'.
-    """
-    # Create an empty string to store the merged data
-    merged_data = ""
-
-    # Loop through all files in the directory
-    for i, filename in enumerate(os.listdir(directory_path)):
-        if filename.endswith(".txt"):
-            # Open the text file and read its contents
-            with open(os.path.join(directory_path, filename), "r") as file:
-                # Skip the first line (header) for all files except the first one
-                if i > 0:
-                    file_contents = file.readlines()[1:]
-                else:
-                    file_contents = file.readlines()
-
-            # Add the contents to the merged_data string with a semicolon separator
-            merged_data += "".join(file_contents).strip() + ";"
-
-    # Save the merged data to a file
-    with open(os.path.join(directory_path, name), "w") as file:
-        file.write(merged_data)
-                    </code>
+def merge_textfiles(directory_path, name="merged.txt"):
+"""
+Merges multiple text files into one and saves the merged content.
+                
+Args:
+    directory_path (str): The path to the directory containing the text files.
+    name (str, optional): The name of the merged file to be saved. Defaults to 'merged.txt'.
+"""
+# Create an empty string to store the merged data
+merged_data = ""
+                
+# Loop through all files in the directory
+for i, filename in enumerate(os.listdir(directory_path)):
+    if filename.endswith(".txt"):
+        # Open the text file and read its contents
+        with open(os.path.join(directory_path, filename), "r") as file:
+            # Skip the first line (header) for all files except the first one
+            if i > 0:
+                file_contents = file.readlines()[1:]
+            else:
+                file_contents = file.readlines()
+                
+        # Add the contents to the merged_data string with a semicolon separator
+        merged_data += "".join(file_contents).strip() + ";"
+                
+# Save the merged data to a file
+with open(os.path.join(directory_path, name), "w") as file:
+    file.write(merged_data)</code>
                  </pre>
-            <p>
-                In a next step, the data is reduced to a yearly average for each metric, transformed into a long format
-                and saved as a pickle file:
-            </p>
+            <div class="container">
+                <p class="centered-text">
+                    In a next step, the data is reduced to a yearly average for each metric, transformed into a long
+                    format
+                    and saved as a pickle file:
+                </p>
+            </div>
+            <pre>
+                <code class="language-python">
+def yearlyAverageDataframe(directory_path, name="pickled"):
+"""
+Loads a dataset from the specified directory 
+path and performs operations to calculate the yearly average 
+metric for each state. The resulting dataframe is transformed
+from wide to long format and saved as a pickle file.
+Args:
+    directory_path (str): The path to the directory containing the air temperature dataset.
+    name (str, optional): The name of the pickle file to be saved. Defaults to "pickled".
+Returns:
+    str: The path to the saved pickle file.
+Raises:
+    This function does not raise any specific exceptions. It relies on the pandas library to handle any file reading errors encountered.
+Example:
+    directory = 'data/temperature/'
+    result = yearlyAverageDataframe(directory, name="air_temp_mean")
+    print(result)
+"""
+# load air temperature dataset
+df = pd.read_csv(directory_path, sep=";", skiprows=[0], on_bad_lines="skip")
+# create new column with timestamp from the columns year and month
+df["date"] = pd.to_datetime(
+    df["Jahr"].astype(str) + "-" + df["Monat"].astype(str) + "-1"
+)
+# list of columns to drop
+drop_cols = [
+    "^Unnamed",
+    "Jahr",
+    "Monat",
+    "^Deutschland",
+    "Thueringen/Sachsen-Anhalt",
+    "Brandenburg/Berlin",
+    "Niedersachsen/Hamburg/Bremen",
+]
+# drop unwanted columns
+df = df.loc[:, ~df.columns.str.contains("|".join(drop_cols))]
+# Sort the dataframe by date
+df_sorted = df.sort_values(by="date")
+# get list of all states except date
+columns = df.drop("date", axis=1).columns.tolist()
+# groupby yearly average
+yearly_average = (
+    df.groupby(df["date"].dt.year)[columns].mean().reset_index(drop=False)
+)
+# transform the data from wide to long format
+data = yearly_average.melt("date", var_name="Bundesland", value_name="value")
+# save dataframe to pickle
+processed_df = data.to_pickle(rf"data\pickle\{name}.pkl")
+return processed_df</code>
+             </pre>
+            <div class="container">
+                <p class="centered-text">
+                    Next the functions are called in a simple for loop to process the raw data:
+                </p>
+            </div>
             <pre>
                     <code class="language-python">
-    def yearlyAverageDataframe(directory_path, name="pickled"):
-    """
-    Loads a dataset from the specified directory 
-    path and performs operations to calculate the yearly average 
-    metric for each state. The resulting dataframe is transformed
-    from wide to long format and saved as a pickle file.
+directory_path_txt_1 = r".\.\data\air_temp_mean"
+directory_path_txt_2 = r".\.\data\precipitation_mean"
+directory_path_txt_3 = r".\.\data\sunshine_duration"
+                
+name_1 = "merged_air_temp_mean.txt"
+name_2 = "merged_precipitation_mean.txt"
+name_3 = "merged_sunshine_duration.txt"
+                
+path_list = [directory_path_txt_1,directory_path_txt_2,directory_path_txt_3]
+                
+name_list = [name_1,name_2,name_3]
+                
+for path, name in zip(path_list, name_list):
+    func.merge_textfiles(path, name)
+                
+directory_path_1 = r".\.\data\merged\merged_air_temp_mean.txt"
+directory_path_2 = r".\.\data\merged\merged_precipitation_mean.txt"
+directory_path_3 = r".\.\data\merged\merged_sunshine_duration.txt"
+                
+path_list_2 = [directory_path_1,directory_path_2,directory_path_3]
+                
+name_1 = "air_temp_mean"
+name_2 = "precipitation_mean"
+name_3 = "sunshine_duration"
+                
+name_list_2 = [name_1,name_2,name_3]
+                
+for path,name in zip(path_list_2,name_list_2):
+    func.yearlyAverageDataframe(path, name)</code>
+                 </pre>
+            <hr />
+            <h1>
+                Data visualization
+            </h1>
+            <div class="container">
+                <p class="centered-text">
+                    import modules
+                </p>
+            </div>
+            <pre>
+                <code class="language-python">
+import geopandas as gpd
+import matplotlib.pyplot as plt
+import pandas as pd
+import streamlit as st
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+from pathlib import Path
+import os</code>
+             </pre>
+            <div class="container">
+                <p class="centered-text">
+                    Next the functions are called in a simple for loop to process the raw data:
+                </p>
+            </div>
+            <pre>
+                <code class="language-python">
+                    path = Path(r"././data/vg2500_geo84/vg2500_bld.shp")
 
-    Args:
-        directory_path (str): The path to the directory containing the air temperature dataset.
-        name (str, optional): The name of the pickle file to be saved. Defaults to "pickled".
+# loading the geospatial data
+gdf = gpd.read_file(path)
 
-    Returns:
-        str: The path to the saved pickle file.
+# Select the "GEN" and "geometry" columns from the DataFrame gdf
+gdf = gdf[["GEN", "geometry"]]
 
-    Raises:
-        This function does not raise any specific exceptions. It relies on the pandas library to handle any file reading errors encountered.
+# Rename the "GEN" column to "Bundesland" in the DataFrame gdf
+gdf = gdf.rename({"GEN": "Bundesland"}, axis=1)
 
-    Example:
-        directory = 'data/temperature/'
-        result = yearlyAverageDataframe(directory, name="air_temp_mean")
-        print(result)
-    """
-    # load air temperature dataset
-    df = pd.read_csv(directory_path, sep=";", skiprows=[0], on_bad_lines="skip")
+# Remove rows where the value in the "Bundesland" column is "Hamburg", "Berlin", or "Bremen" from the DataFrame gdf
+gdf = gdf[~gdf["Bundesland"].isin(["Hamburg", "Berlin", "Bremen"])]</code>
+             </pre>
+            <div class="container">
+                <p class="centered-text">
+                    Next the functions are called in a simple for loop to process the raw data:
+                </p>
+            </div>
+            <pre>
+                <code class="language-python">
+df_path = Path(r"././data/pickle/air_temp_mean.pkl")
 
-    # create new column with timestamp from the columns year and month
-    df["date"] = pd.to_datetime(
-        df["Jahr"].astype(str) + "-" + df["Monat"].astype(str) + "-1"
+# loading the data
+df = pd.read_pickle(df_path)
+
+# Replace "Thueringen" with "Thüringen" and "Baden-Wuerttemberg" with "Baden-Württemberg"
+df["Bundesland"] = df["Bundesland"].replace(
+    ["Thueringen", "Baden-Wuerttemberg"],
+    ["Thüringen", "Baden-Württemberg"]
+)</code>
+             </pre>
+            <div class="container">
+                <p class="centered-text">
+                    Next the functions are called in a simple for loop to process the raw data:
+                </p>
+            </div>
+            <pre>
+                <code class="language-python">
+# Merge the two DataFrames based on the "name" column
+merged_df = pd.merge(gdf, df, on="Bundesland")
+
+# Define the minimum and maximum years to use in the slider
+min_year = int(merged_df["date"].min())
+max_year = int(merged_df["date"].max())
+
+# Define the default year for the slider
+default_year = max_year</code>
+             </pre>
+            <div class="container">
+                <p class="centered-text">
+                    Next the functions are called in a simple for loop to process the raw data:
+                </p>
+            </div>
+            <pre>
+                <code class="language-python">
+st.markdown("##### Mean Air Temperature (yearly, since 188
+# Add a slider for the year of the map
+help1 = """
+Move the read circle on the slider to select a year.
+The oldest year selectable is 1881, the youngest 2022.
+For 2022, there is only data for January, February and March.
+"""
+
+year = st.slider("Please choose a year.", min_year, max_year, default_year, help=help1)
+
+# Split the page into two columns
+col1, col2 = st.columns(2)
+
+# Filter the GeoDataFrame based on the selected year
+gdf_year = merged_df[merged_df["date"] == year]
+
+# Find the row index of the maximum value in the "value" column of the DataFrame gdf_year
+max_value_index = gdf_year["value"].idxmax()
+
+# Retrieve the value in the "Bundesland" column for the row with the maximum value
+warmest_state = gdf_year.loc[max_value_index, "Bundesland"]
+
+# Find the row index of the minimum value in the "value" column of the DataFrame gdf_year
+min_value_index = gdf_year["value"].idxmin()
+
+# Retrieve the value in the "Bundesland" column for the row with the minimum value
+coldest_state = gdf_year.loc[min_value_index, "Bundesland"]
+
+# Find the maximum value in the "value" column of the DataFrame gdf_year
+max_temperature = gdf_year["value"].max()
+
+# Round the maximum temperature value to 2 decimal places
+temperature_warm = round(max_temperature, 2)
+
+# Find the minimum value in the "value" column of the DataFrame gdf_year
+min_temperature = gdf_year["value"].min()
+
+# Round the minimum temperature value to 2 decimal places
+temperature_cold = round(min_temperature, 2)
+
+# Specify the column to use for the coloring
+color_column = "value"
+
+# sort values
+gdf_year_sorted = gdf_year.sort_values("value")
+
+# Create a MinMaxScaler object
+scaler = MinMaxScaler()
+
+# Normalize the 'value' column
+gdf_year_sorted["normalized_value"] = scaler.fit_transform(gdf_year_sorted[["value"]])</code>
+             </pre>
+            <div class="container">
+                <p class="centered-text">
+                    Next the functions are called in a simple for loop to process the raw data:
+                </p>
+            </div>
+            <pre>
+                <code class="language-python">
+# Plot the GeoDataFrame and fill it with values based on the colormap of the specified column
+with col1:
+    fig, ax = plt.subplots(figsize=(10, 10))
+    gdf_year.plot(column=color_column, cmap="coolwarm", ax=ax, legend=True)
+    ax.set_title(f"Air Temperature in {year} in Celcius")
+    st.pyplot(fig)
+
+    st.markdown(
+        f"Warmest state in {year}: {warmest_state} with a mean temperature of {temperature_warm} C",
+        unsafe_allow_html=True,
+    )
+    
+
+
+with col2:
+    fig2, ax = plt.subplots(figsize=(10, 3))
+    colors = plt.cm.coolwarm(np.linspace(0, 1, len(gdf_year_sorted)))
+    plt.bar(
+        gdf_year_sorted["Bundesland"],
+        gdf_year_sorted["value"],
+        color=colors,
+        width=0.8,
     )
 
-    # list of columns to drop
-    drop_cols = [
-        "^Unnamed",
-        "Jahr",
-        "Monat",
-        "^Deutschland",
-        "Thueringen/Sachsen-Anhalt",
-        "Brandenburg/Berlin",
-        "Niedersachsen/Hamburg/Bremen",
-    ]
+    plt.ylabel("Air temperature in C")
+    plt.xticks(rotation=75)
+    plt.title(f"Absolute temperatures in {year}")
+    plt.show()
 
-    # drop unwanted columns
-    df = df.loc[:, ~df.columns.str.contains("|".join(drop_cols))]
+    st.pyplot(fig2)
 
-    # Sort the dataframe by date
-    df_sorted = df.sort_values(by="date")
+    fig3, ax = plt.subplots(figsize=(10, 3))
 
-    # get list of all states except date
-    columns = df.drop("date", axis=1).columns.tolist()
-
-    # groupby yearly average
-    yearly_average = (
-        df.groupby(df["date"].dt.year)[columns].mean().reset_index(drop=False)
+    plt.bar(
+        gdf_year_sorted["Bundesland"],
+        gdf_year_sorted["normalized_value"],
+        color=colors,
+        width=0.8,
     )
 
-    # transform the data from wide to long format
-    data = yearly_average.melt("date", var_name="Bundesland", value_name="value")
+    plt.ylabel("Percentage in temperature difference")
+    plt.xticks(rotation=75)
+    plt.title(f"Relative temperatures in {year}")
+    plt.show()
 
-    # save dataframe to pickle
-    processed_df = data.to_pickle(rf"data\pickle\{name}.pkl")
+    st.pyplot(fig3)
 
-    return processed_df
-                    </code>
-                 </pre>
-            <p>
-                Next the functions are called in a simple for loop to process the raw data:
-            </p>
+    st.markdown(
+        f"<small> Coldest state in {year}: {coldest_state} with a mean temperature of {temperature_cold} C</small>",
+        unsafe_allow_html=True,
+    )</code>         
+             </pre>
+            <div class="container">
+                <p class="centered-text">
+                    Next the functions are called in a simple for loop to process the raw data:
+                </p>
+            </div>
             <pre>
-                    <code class="language-python">
-    directory_path_txt_1 = r".\.\data\air_temp_mean"
-    directory_path_txt_2 = r".\.\data\precipitation_mean"
-    directory_path_txt_3 = r".\.\data\sunshine_duration"
+                <code class="language-python">
+name_list = df['Bundesland'].uniq
+selected_states = st.multiselect('Select states', name_list, default='Hessen')
 
-    name_1 = "merged_air_temp_mean.txt"
-    name_2 = "merged_precipitation_mean.txt"
-    name_3 = "merged_sunshine_duration.txt"
+if selected_states:
+    subset = df[df['Bundesland'].isin(selected_states)]
+    subset = subset[subset['date'] != 2022]
+    grouped_data = subset.groupby('Bundesland')
+    fig4 = plt.figure(figsize=(10,6))
 
-    path_list = [directory_path_txt_1,directory_path_txt_2,directory_path_txt_3]
+    for name, group in grouped_data:
+        plt.plot(group['date'],group['value'], label=name)
+        plt.ylabel('Yearly mean air temperature in Celcius')
 
-    name_list = [name_1,name_2,name_3]
-
-    for path, name in zip(path_list, name_list):
-        func.merge_textfiles(path, name)
-
-    directory_path_1 = r".\.\data\merged\merged_air_temp_mean.txt"
-    directory_path_2 = r".\.\data\merged\merged_precipitation_mean.txt"
-    directory_path_3 = r".\.\data\merged\merged_sunshine_duration.txt"
-
-    path_list_2 = [directory_path_1,directory_path_2,directory_path_3]
-
-    name_1 = "air_temp_mean"
-    name_2 = "precipitation_mean"
-    name_3 = "sunshine_duration"
-
-    name_list_2 = [name_1,name_2,name_3]
-
-    for path,name in zip(path_list_2,name_list_2):
-        func.yearlyAverageDataframe(path, name)
-                    </code>
-                 </pre>
+    plt.legend()  
+    plt.show()
+    st.pyplot(fig4)
+    
+else:
+    plt.show()
+    # Display an empty figure as a placeholder
+    st.pyplot(plt.figure())</code>     
+             </pre>
         </section>
     </main>
     <footer>
