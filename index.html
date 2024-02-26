@@ -1,37 +1,344 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Paul Heckmann</title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="images\favicon.ico" />
 
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Paul Heckmann | Software Developer / Data Scientist</title>
+
+    <script defer src="script.js"></script>
+  </head>
   <body>
-    <header>
-      <h1>Paul Heckmann - Data scientist</h1>
-    </header>
-    <nav class="navbar">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="pages/Data_science.html">Projects</a></li>
-        <li><a href="pages/About.html">About</a></li>
-      </ul>
-    </nav>
-    <div class="containerbackground">
-      <div class="content">
-        <main>
-          <h1>Welcome to my website</h1>
-        </main>
+    <header class="header">
+      <nav class="nav">
+        <ul class="nav__links">
+          <li class="nav__item">
+            <a class="nav__link" href="#section--0">Home</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--1">About me</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--2">Research publications</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--3">Education</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--4">Skills</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--5">Data Science Projects</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--6">Interests</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--7">Contact</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header__title">
+        <h1>Welcome to my homepage</h1>
+        <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button>
+        <img
+          src="images\profil_pic.png"
+          class="header__img"
+          alt="Minimalist bank items"
+        />
       </div>
-    </div>
-    <footer>
-      <p>
-        Copyright &copy; Paul Heckmann
+    </header>
+
+    <section class="section" id="section--1">
+      <div class="section__title">
+        <!--         <h2 class="section__description">About me</h2> -->
+        <h3 class="section__header">About me</h3>
+      </div>
+      <div class="About me">
+        <p>
+          As a PhD candidate in geoscience about to graduate, I have discovered
+          my passion for data treatment and visualization. Throughout my
+          academic journey, I have gained a foundation in data analysis,
+          statistical methods, and programming. However, it was during my
+          graduate studies that I realized my interest in exploring and
+          visualizing data to uncover insights and patterns. I am passionate
+          about using data to solve real-world problems and creating insightful
+          visualizations that communicate complex data in a clear and
+          understandable way. This portfolio is a reflection of my expertise and
+          experience as a data scientist. It showcases some of my most
+          interesting projects and highlights my approach to data analysis and
+          visualization. I hope it provides you with insight into my
+          capabilities as a data scientist and inspires you to explore the vast
+          potential of data science.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="section--2">
+      <div class="section__title">
+        <!--         <h2 class="section__description">Research publications</h2> -->
+        <h3 class="section__header">Research publications</h3>
+      </div>
+      <div class="Research publications">
+        <ul>
+          <li>
+            Heckmann, P., Palinkaš, S. S., Hansen, H., Iacono-Marziano, G.,
+            Rajič, K., Forien, M., and Bergh, S. G.: Petrogenesis of zoned and
+            unzoned mafic pegmatites: An insight from the Palaeoproterozoic
+            mafic-ultramafic Hamn intrusion, Northern Norway, Lithos, 428,
+            106818, 2022.
+            <a href="https://doi.org/10.1016/j.lithos.2022.106818"
+              >https://doi.org/10.1016/j.lithos.2022.106818</a
+            >
+          </li>
+          <br />
+          <li>
+            Heckmann, P., Iacono-Marziano, G., and Strmić Palinkaš, S.: An
+            experimental study of the effect of water and chlorine on
+            plagioclase nucleation and growth in mafic magmas: application to
+            mafic pegmatites, European Journal of Mineralogy, 35, 1111–1124,
+            2023.
+            <a href="https://doi.org/10.5194/ejm-35-1111-2023"
+              >https://doi.org/10.5194/ejm-35-1111-2023</a
+            >
+          </li>
+          <br />
+          <li>
+            Heckmann, et al., Sulfur isotopes, trace element, and textural
+            analyses of base metal sulfides Paleoproterozoic mafic ultramafic
+            Hamn intrusion Northern Norway (in progress)
+          </li>
+          <br />
+          <li>Heckmann, et al., Petrology Multimeter (in progress)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="section--3">
+      <div class="section__title">
+        <!--         <h2 class="section__description">Education</h2> -->
+        <h3 class="section__header">Education</h3>
+      </div>
+      <div class="Education">
+        <ul>
+          <li>
+            Research Stay at Insitut des Sciences de la Terra d'Orleans, France
+          </li>
+          <br />
+          <li>PhD Candidate at UiT The Arctic University of Norway</li>
+          <br />
+          <li>
+            Master of Science in Geosciences from Georg-August-Universität
+            Göttingen
+          </li>
+          <br />
+          <li>
+            Bachelor of Science in Geosciences from Georg-August-Universität
+            Göttingen (with distinction)
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="section--4">
+      <div class="section__title">
+        <!--         <h2 class="section__description">Skills</h2> -->
+        <h3 class="section__header">Skills</h3>
+      </div>
+      <div class="Skills">
+        <ul>
+          <li>Python (Pandas, Matplotlib, Scikit-learn)</li>
+          <br />
+          <li>JavaScript</li>
+          <br />
+          <li>
+            Snowflake
+            <a href="certificate\Snowflake.pdf" download>certificate</a>
+          </li>
+          <br />
+          <li>
+            SQL (PostgreSQL)
+            <a href="certificate\SQL.pdf" download>certificate</a>
+          </li>
+          <br />
+          <li>Git</li>
+          <br />
+          <li>HTML, CSS</li>
+          <br />
+          <li>LaTex, Jabref</li>
+          <br />
+          <li>Fluent: German, English</li>
+          <br />
+          <li>Basics: Spanish, Norwegian</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="section--5">
+      <div class="section__title">
+        <!--         <h2 class="section__description">Example Data Science Projects</h2> -->
+        <h3 class="section__header">Example Data Science</h3>
+      </div>
+      <div class="Example Data Science">
+        <ul>
+          <li>Example Data Science</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="section--6">
+      <div class="section__title">
+        <!--         <h2 class="section__description">Interest</h2> -->
+        <h3 class="section__header">Interest</h3>
+      </div>
+      <div class="Interest">
+        <ul>
+          <li>Bouldering, Biking, Piano, Guitar</li>
+        </ul>
+      </div>
+    </section>
+    <!-- 
+    <section class="section" id="section--5">
+      <div class="section__title">
+                <h2 class="section__description">Data Science Projects</h2>
+        <h3 class="section__header">Example Data Science Projects</h3>
+      </div>
+
+      <div class="operations">
+        <div class="operations__tab-container">
+          <button
+            class="btn operations__tab operations__tab--1 operations__tab--active"
+            data-tab="1"
+          >
+            <span>01</span>Project #1
+          </button>
+          <button class="btn operations__tab operations__tab--2" data-tab="2">
+            <span>02</span>Project #2
+          </button>
+          <button class="btn operations__tab operations__tab--3" data-tab="3">
+            <span>03</span>Project #3
+          </button>
+        </div>
+        <div
+          class="operations__content operations__content--1 operations__content--active"
+        >
+          <h5 class="operations__header">Historical weather data analysis</h5>
+          <img
+            src="images\project1_teaser.png"
+            alt="Air temperature map Germany"
+          />
+        </div>
+        <div class="operations__content operations__content--2">
+          <h5 class="operations__header">
+            Music Billboard 100 top-ten singles Audio Analysis
+          </h5>
+          <img src="images\project2_teaser.png" alt="Spotify Analysery" />
+        </div>
+        <div class="operations__content operations__content--3">
+          <h5 class="operations__header">Fitness data visualization</h5>
+          <img src="images\project3_teaser.png" alt="Fitness tracker app" />
+        </div>
+      </div>
+    </section> -->
+
+    <!--     <section class="section" id="section--6">
+      <div class="section__title section__title--testimonials">
+                 <h2 class="section__description">Interest</h2> 
+        <h3 class="section__header">Interest</h3>
+      </div>
+
+      <div class="slider">
+        <div class="slide">
+            <div class="testimonial"> 
+          <h5 class="testimonial__header">Bouldering</h5>
+          <img src="images\Rennrad.jpeg" alt="Bike" class="slide_photos" />
+           </div> 
+        </div>
+
+        <div class="slide">
+           <div class="testimonial"> 
+          <h5 class="testimonial__header">Piano</h5>
+          <img src="images\Piano.jpeg" alt="Bike" class="slide_photos" />
+           </div> 
+        </div>
+
+        <div class="slide">
+           <div class="testimonial"> 
+          <h5 class="testimonial__header">Guitar</h5>
+          <img src="images\Guitar.jpeg" alt="Bike" class="slide_photos" />
+           </div> 
+        </div>
+
+        <button class="slider__btn slider__btn--left">&larr;</button>
+        <button class="slider__btn slider__btn--right">&rarr;</button>
+        <div class="dots"></div>
+      </div>
+    </section>
+ -->
+    <section class="section" id="section--7">
+      <div class="section__title">
+        <!--         <h2 class="section__description">Contact</h2> -->
+        <h3 class="section__header">Contact</h3>
+      </div>
+      <div class="Contact">
+        <p>
+          <a href="https://github.com/P-Heckmann"> My GitHub</a>
+        </p>
+        <br />
+        <p>
+          <a href="https://www.linkedin.com/in/paul-heckmann-979904233/">
+            My LinkedIn</a
+          >
+        </p>
+        <br />
+        <p>
+          <a href="mailto:paul.he@posteo.de">­paul.he@posteo.de</a>
+        </p>
+        <br />
+        <p>
+          <a href="cv\CV_english.pdf" download>Download CV in English</a>
+        </p>
+        <br />
+        <p>
+          <a href="cv\CV_deutsch.pdf" download>Download CV in German</a>
+        </p>
+        <br />
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="footer__copyright">
+        &copy; Copyright by Paul Heckmann
         <script>
           document.write(new Date().getFullYear());
         </script>
       </p>
     </footer>
+
+    <div class="modal hidden">
+      <button class="btn--close-modal">&times;</button>
+      <h2 class="modal__header">
+        Open your bank account <br />
+        in just <span class="highlight">5 minutes</span>
+      </h2>
+      <form class="modal__form">
+        <label>First Name</label>
+        <input type="text" />
+        <label>Last Name</label>
+        <input type="text" />
+        <label>Email Address</label>
+        <input type="email" />
+        <button class="btn">Next step &rarr;</button>
+      </form>
+    </div>
+    <div class="overlay hidden"></div>
   </body>
 </html>
