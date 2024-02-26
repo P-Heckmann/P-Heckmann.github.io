@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="92.863586mm"
-   height="104.21719mm"
-   viewBox="0 0 92.863586 104.21719"
+   width="100.21532mm"
+   height="99.931419mm"
+   viewBox="0 0 100.21532 99.931416"
    version="1.1"
    id="svg5"
    inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
@@ -28,11 +28,11 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.73851712"
-     inkscape:cx="13.540648"
-     inkscape:cy="166.54997"
+     inkscape:zoom="1.4770342"
+     inkscape:cx="241.02353"
+     inkscape:cy="234.93023"
      inkscape:window-width="1920"
-     inkscape:window-height="1009"
+     inkscape:window-height="1057"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -129,7 +129,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-56.922019,-95.137481)">
+     transform="translate(-49.677956,-97.280368)">
     <text
        xml:space="preserve"
        style="font-size:3.175px;fill:none;stroke:#000000;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
@@ -140,9 +140,10 @@
          id="tspan4782"
          style="stroke-width:3"
          x="35.109772"
-         y="52.306393"></tspan></text>
+         y="52.306393" /></text>
     <g
-       id="g4908">
+       id="g4908"
+       transform="matrix(1.0791671,0,0,0.95887653,-11.750415,6.0552706)">
       <ellipse
          style="fill:none;stroke:url(#linearGradient4708);stroke-width:3.4134;stroke-dasharray:none;stroke-opacity:1"
          id="path172-9"
