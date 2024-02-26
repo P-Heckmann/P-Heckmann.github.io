@@ -19,9 +19,9 @@
     <header class="header">
       <nav class="nav">
         <ul class="nav__links">
-          <li class="nav__item">
+          <!--           <li class="nav__item">
             <a class="nav__link" href="#section--0">Home</a>
-          </li>
+          </li> -->
           <li class="nav__item">
             <a class="nav__link" href="#section--1">About me</a>
           </li>
@@ -59,8 +59,7 @@
 
     <section class="section" id="section--1">
       <div class="section__title">
-        <!--         <h2 class="section__description">About me</h2> -->
-        <h3 class="section__header">About me</h3>
+        <h2 class="section__header">About me</h2>
       </div>
       <div class="About me">
         <p>
@@ -84,8 +83,7 @@
 
     <section class="section" id="section--2">
       <div class="section__title">
-        <!--         <h2 class="section__description">Research publications</h2> -->
-        <h3 class="section__header">Research publications</h3>
+        <h2 class="section__header">Research publications</h2>
       </div>
       <div class="Research publications">
         <ul>
@@ -95,7 +93,7 @@
             unzoned mafic pegmatites: An insight from the Palaeoproterozoic
             mafic-ultramafic Hamn intrusion, Northern Norway, Lithos, 428,
             106818, 2022.
-            <a href="https://doi.org/10.1016/j.lithos.2022.106818"
+            <a class="links" href="https://doi.org/10.1016/j.lithos.2022.106818"
               >https://doi.org/10.1016/j.lithos.2022.106818</a
             >
           </li>
@@ -106,7 +104,7 @@
             plagioclase nucleation and growth in mafic magmas: application to
             mafic pegmatites, European Journal of Mineralogy, 35, 1111–1124,
             2023.
-            <a href="https://doi.org/10.5194/ejm-35-1111-2023"
+            <a class="links" href="https://doi.org/10.5194/ejm-35-1111-2023"
               >https://doi.org/10.5194/ejm-35-1111-2023</a
             >
           </li>
@@ -124,9 +122,9 @@
 
     <section class="section" id="section--3">
       <div class="section__title">
-        <!--         <h2 class="section__description">Education</h2> -->
-        <h3 class="section__header">Education</h3>
+        <h2 class="section__header">Education</h2>
       </div>
+      <div class="operations__tab-container"></div>
       <div class="Education">
         <ul>
           <li>
@@ -150,8 +148,7 @@
 
     <section class="section" id="section--4">
       <div class="section__title">
-        <!--         <h2 class="section__description">Skills</h2> -->
-        <h3 class="section__header">Skills</h3>
+        <h2 class="section__header">Skills</h2>
       </div>
       <div class="Skills">
         <ul>
@@ -161,12 +158,14 @@
           <br />
           <li>
             Snowflake
-            <a href="certificate\Snowflake.pdf" download>certificate</a>
+            <a class="links" href="certificate\Snowflake.pdf" download
+              >certificate</a
+            >
           </li>
           <br />
           <li>
             SQL (PostgreSQL)
-            <a href="certificate\SQL.pdf" download>certificate</a>
+            <a class="links" href="certificate\SQL.pdf" download>certificate</a>
           </li>
           <br />
           <li>Git</li>
@@ -184,24 +183,131 @@
 
     <section class="section" id="section--5">
       <div class="section__title">
-        <!--         <h2 class="section__description">Example Data Science Projects</h2> -->
-        <h3 class="section__header">Example Data Science</h3>
+        <h2 class="section__header">Example Data Science</h2>
       </div>
       <div class="Example Data Science">
         <ul>
-          <li>Example Data Science</li>
+          <li><h3>Historical weather data analysis</h3></li>
+          <br />
+          <p>
+            <a
+              class="links"
+              href="https://p-heckmann-weather-home-deploy-pwgt2l.streamlit.app/"
+              >Click here to go to the app</a
+            >
+          </p>
+          <br />
+          <p>
+            <a class="links" href="https://github.com/P-Heckmann/Weather/"
+              >Click here to go to the github repository</a
+            >
+          </p>
+          <br />
+          <p>
+            This streamlit app is based on publicly free available weather data
+            from the
+            <a class="links" href="https://www.dwd.de/EN/Home/home_node.html"
+              >German Meteorological Service</a
+            >
+            (Deutscher Wetterdienst) and a shapefile from the
+            <a class="links" href="https://www.bkg.bund.de/DE/Home/home.html"
+              >German Federal Agency for Cartography and Geodesy</a
+            >
+            (Bundesamt für Kartographie und Geodäsie). It offers an interactive
+            visualization of weather data from the different german states, in
+            terms of air temperature, precipitation and sunshine duration. The
+            main purpose of this project was to test the python libraries
+            <a class="links" href="https://geopandas.org/en/stable/"
+              >geopandas</a
+            >
+            in combination with the visualization library
+            <a class="links" href="https://matplotlib.org/">matplotlib</a> and
+            <a class="links" href="https://streamlit.io/">streamlit</a>.
+          </p>
+          <br />
+          <li><h3>Music Billboard 100 top-ten singles Audio Analysis</h3></li>
+          <br />
+          <p>
+            <a
+              class="links"
+              href="https://p-heckmann-spotify-home-deploy-qbxmxy.streamlit.app/"
+              >Click here to go to the app</a
+            >
+          </p>
+          <br />
+          <p>
+            <a class="links" href="https://github.com/P-Heckmann/Spotify/"
+              >Click here to go to the github repository</a
+            >
+          </p>
+          <br />
+          <p>
+            This project was inspired by a
+            <a
+              class="links"
+              href="https://blog.streamlit.io/find-the-top-songs-from-your-high-school-years-with-a-streamlit-app/"
+              >blog post</a
+            >
+            by Robert Ritz. In the blog post, Robert Ritz describes how one can
+            scrape the
+            <a
+              class="links"
+              href="https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles"
+              >Billboard Hot 100 top-ten singles</a
+            >
+            from wikipedia and utilise the Spotify API via
+            <a class="links" href="https://spotipy.readthedocs.io/en/2.22.1/"
+              >spotipy</a
+            >
+            to build an app where the user can choose the years to receive the
+            Spotify playlist link the the top songs of that years. In my
+            project, I started to utilise the Ritz's scaping function to get a
+            the data for the Billboard Hot 100 top-ten singles with the spotify
+            (uris) to later be merge the list with audio analytic data from the
+            spotify API via spotipy. The goal of the project is to see if
+            through the last decates one can see a change in the polular key or
+            beat-per-minute.
+          </p>
+          <br />
+          <li><h3>Fitness data visualization</h3></li>
+          <br />
+          <p>
+            <a
+              class="links"
+              href="https://p-heckmann-fitness-home-deploy-gdw23v.streamlit.app/"
+              >Click here to go to the app</a
+            >
+          </p>
+          <br />
+          <p>
+            <a class="links" href="https://github.com/P-Heckmann/Fitness/"
+              >Click here to go to the github repository</a
+            >
+          </p>
+          <br />
+          <p class="centered-text">
+            I recreated the fitness data display from Garmin Connect for this
+            project. The aim of this work was to learn how to dreat datatime
+            data and create interactive plots with the visualization library
+            <a class="links" href="https://altair-viz.github.io/">altair</a>
+          </p>
         </ul>
       </div>
     </section>
 
     <section class="section" id="section--6">
       <div class="section__title">
-        <!--         <h2 class="section__description">Interest</h2> -->
-        <h3 class="section__header">Interest</h3>
+        <h2 class="section__header">Interest</h2>
       </div>
       <div class="Interest">
         <ul>
-          <li>Bouldering, Biking, Piano, Guitar</li>
+          <li>Bouldering</li>
+          <br />
+          <li>Piano</li>
+          <br />
+          <li>Guitar</li>
+          <br />
+          <li>Biking</li>
         </ul>
       </div>
     </section>
@@ -290,25 +396,34 @@
       </div>
       <div class="Contact">
         <p>
-          <a href="https://github.com/P-Heckmann"> My GitHub</a>
+          <a class="links" href="https://github.com/P-Heckmann"> My GitHub</a>
         </p>
         <br />
         <p>
-          <a href="https://www.linkedin.com/in/paul-heckmann-979904233/">
+          <a
+            class="links"
+            href="https://www.linkedin.com/in/paul-heckmann-979904233/"
+          >
             My LinkedIn</a
           >
         </p>
         <br />
         <p>
-          <a href="mailto:paul.he@posteo.de">­paul.he@posteo.de</a>
+          <a class="links" href="mailto:paul.he@posteo.de"
+            >­paul.he@posteo.de</a
+          >
         </p>
         <br />
         <p>
-          <a href="cv\CV_english.pdf" download>Download CV in English</a>
+          <a class="links" href="cv\CV_english.pdf" download
+            >Download CV in English</a
+          >
         </p>
         <br />
         <p>
-          <a href="cv\CV_deutsch.pdf" download>Download CV in German</a>
+          <a class="links" href="cv\CV_deutsch.pdf" download
+            >Download CV in German</a
+          >
         </p>
         <br />
       </div>
@@ -325,11 +440,11 @@
 
     <div class="modal hidden">
       <button class="btn--close-modal">&times;</button>
-      <h2 class="modal__header">
+      <!--       <h2 class="modal__header">
         Open your bank account <br />
         in just <span class="highlight">5 minutes</span>
-      </h2>
-      <form class="modal__form">
+      </h2> -->
+      <!--       <form class="modal__form">
         <label>First Name</label>
         <input type="text" />
         <label>Last Name</label>
@@ -337,7 +452,7 @@
         <label>Email Address</label>
         <input type="email" />
         <button class="btn">Next step &rarr;</button>
-      </form>
+      </form> -->
     </div>
     <div class="overlay hidden"></div>
   </body>
