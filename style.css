@@ -9,6 +9,45 @@
   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03); */
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hamburger-menu {
+  display: none; /* Hide by default */
+  cursor: pointer;
+}
+
+.line {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 5px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin: 0 10px;
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+  .hamburger-menu {
+    display: block; /* Show only on mobile devices */
+  }
+  .nav-links {
+    display: none; /* Hide by default on mobile */
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;

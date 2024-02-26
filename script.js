@@ -11,6 +11,12 @@ const tabs = document.querySelectorAll(".operations__tab");
 const tabsContainer = document.querySelector(".operations__tab-container");
 const tabsContent = document.querySelectorAll(".operations__content");
 
+document
+  .querySelector(".hamburger-menu")
+  .addEventListener("click", function () {
+    document.querySelector(".nav__links").classList.toggle("show");
+  });
+
 ///////////////////////////////////////
 // Modal window
 
