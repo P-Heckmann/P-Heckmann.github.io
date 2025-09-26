@@ -3,406 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" type="image/png" href="images\favicon.ico" />
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>Paul Heckmann | Software Developer / Data Scientist</title>
+    <title>Paul Heckmann</title>
 
     <script defer src="script.js"></script>
   </head>
+
   <body>
-    <header class="header">
-      <nav class="nav">
-        <ul class="nav__links">
-          <li class="nav__item">
-            <a class="nav__link" href="#section--0">Home</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--1">About me</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--2">Research publications</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--3">Education</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--4">Skills</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--5">Data Science Projects</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--6">Interests</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--7">Web apps</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--8">Contact</a>
-          </li>
+    <header>
+      <nav>
+        <a href="index.html"> <p>Paul Heckmann</p></a>
+        <div>
+        <ul>
+          <div class="dropdown">
+            <button class="dropbtn">
+              About me
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="/pages/research.html">Research publications</a>
+              <a href="/pages/education.html">Education</a>
+              <a href="/pages/skills.html">Skills</a>
+              <a href="/pages/interests.html">Interests</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="dropbtn">
+              Data Science Projects
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="/pages/weather.html">Weather</a>
+              <a href="/pages/music.html">Music</a>
+              <a href="/pages/sports.html">Sports</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="dropbtn">
+              Web Apps
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="#link1">Urban eyes</a>
+              <a href="#link2">Geolidays</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="dropbtn">
+              Geosciences
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="#link1">Thermodynamic modelling</a>
+              <a href="#link2">Geolithochemistry</a>
+            </div>
+          </div>
+        </div>
+          <!--  -------------------------- Side Nav -------------------------- -->
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+              >&times;</a
+            >
+            <a href="index.html">Home</a>
+            <h2>About me</h2>
+            <a href="/pages/research.html">Research</a>
+            <a href="/pages/education.html">Education</a>
+            <a href="/pages/skills.html">Skills</a>
+            <a href="/pages/interests.html">Interests</a>
+            <h2>Data Science Projects</h2>
+            <a href="/pages/weather.html">Weather</a>
+            <a href="/pages/music.html">Music</a>
+            <a href="/pages/sports.html">Sports</a>
+            <h2>Web Apps</h2>
+            <a href="#">Urban eyes</a>
+            <a href="#">Geolidays</a>
+            <h2>Geosciences</h2>
+            <a href="#">Thermodynamic modelling</a>
+            <a href="#">Geolithochemistry</a>
+          </div>
+          <span
+            class="sidenav-button"
+            style="font-size: 30px; cursor: pointer"
+            onclick="openNav()"
+            >&#9776;</span
+          >
         </ul>
       </nav>
 
-      <nav class="navbar">
-        <div class="hamburger-menu">
-          <div class="line">
-            <a class="nav__link" href="#section--0">Home</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--1">About me</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--2">Research publications</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--3">Education</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--4">Skills</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--5">Data Science Projects</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--6">Interests</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--7">Contact</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--7">Contact</a>
-          </div>
-        </div>
-      </nav> 
 
-      <div class="header__title">
-        <h1>Welcome to my homepage</h1>
-        <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button>
-        <img
-          src="images\profil_pic.png"
-          class="header__img"
-          alt="profil_pic"
-        />
-      </div>
-    </header>
+    <!--  -------------------------- CONTENT -------------------------- -->
 
-    <section class="section" id="section--1">
-      <div class="section__title">
-        <h2 class="section__header">About me</h2>
-      </div>
-      <div class="About me">
-        <p>
-          As a PhD candidate in geoscience about to graduate, I have discovered
-          my passion for data treatment and visualization. Throughout my
-          academic journey, I have gained a foundation in data analysis,
-          statistical methods, and programming. However, it was during my
-          graduate studies that I realized my interest in exploring and
-          visualizing data to uncover insights and patterns. I am passionate
-          about using data to solve real-world problems and creating insightful
-          visualizations that communicate complex data in a clear and
-          understandable way. This portfolio is a reflection of my expertise and
-          experience as a data scientist. It showcases some of my most
-          interesting projects and highlights my approach to data analysis and
-          visualization. I hope it provides you with insight into my
-          capabilities as a data scientist and inspires you to explore the vast
-          potential of data science.
-        </p>
-      </div>
-    </section>
 
-    <section class="section" id="section--2">
-      <div class="section__title">
-        <h2 class="section__header">Research publications</h2>
+    <div class="section-title">
+      <h2 class="section-header">Welcome to my homepage</h2>
+    </div>
+    <div class="section">
+      <p>
+        As a PhD candidate in geoscience about to graduate, I have discovered my
+        passion for data treatment and visualization. Throughout my academic
+        journey, I have gained a foundation in data analysis, statistical
+        methods, and programming. However, it was during my graduate studies
+        that I realized my interest in exploring and visualizing data to uncover
+        insights and patterns. I am passionate about using data to solve
+        real-world problems and creating insightful visualizations that
+        communicate complex data in a clear and understandable way. This
+        portfolio is a reflection of my expertise and experience as a data
+        scientist. It showcases some of my most interesting projects and
+        highlights my approach to data analysis and visualization. I hope it
+        provides you with insight into my capabilities as a data scientist and
+        inspires you to explore the vast potential of data science.
+      </p>
+      <div class="profil-image">
+        <img src="images\profil_pic.png" class="header__img" alt="profil_pic" />
       </div>
-      <div class="Research publications">
-        <ul>
-          <li>
-            Heckmann, P., Palinkaš, S. S., Hansen, H., Iacono-Marziano, G.,
-            Rajič, K., Forien, M., and Bergh, S. G.: Petrogenesis of zoned and
-            unzoned mafic pegmatites: An insight from the Palaeoproterozoic
-            mafic-ultramafic Hamn intrusion, Northern Norway, Lithos, 428,
-            106818, 2022.
-            <a class="links" href="https://doi.org/10.1016/j.lithos.2022.106818" target="_blank"
-              >https://doi.org/10.1016/j.lithos.2022.106818</a
-            >
-          </li>
-          <br />
-          <li>
-            Heckmann, P., Iacono-Marziano, G., and Strmić Palinkaš, S.: An
-            experimental study of the effect of water and chlorine on
-            plagioclase nucleation and growth in mafic magmas: application to
-            mafic pegmatites, European Journal of Mineralogy, 35, 1111–1124,
-            2023.
-            <a class="links" href="https://doi.org/10.5194/ejm-35-1111-2023" target="_blank"
-              >https://doi.org/10.5194/ejm-35-1111-2023</a
-            >
-          </li>
-          <br />
-          <li>
-            Heckmann, et al., Sulfur isotopes, trace element, and textural
-            analyses of base metal sulfides Paleoproterozoic mafic ultramafic
-            Hamn intrusion Northern Norway (in progress)
-          </li>
-          <br />
-          <li>Heckmann, et al., Petrology Multimeter (in progress)</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="section--3">
-      <div class="section__title">
-        <h2 class="section__header">Education</h2>
-      </div>
-      <div class="operations__tab-container"></div>
-      <div class="Education">
-        <ul>
-          <li>
-            Research Stay at Insitut des Sciences de la Terra d'Orleans, France
-          </li>
-          <br />
-          <li>PhD Candidate at UiT The Arctic University of Norway</li>
-          <br />
-          <li>
-            Master of Science in Geosciences from Georg-August-Universität
-            Göttingen
-          </li>
-          <br />
-          <li>
-            Bachelor of Science in Geosciences from Georg-August-Universität
-            Göttingen (with distinction)
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="section--4">
-      <div class="section__title">
-        <h2 class="section__header">Skills</h2>
-      </div>
-      <div class="Skills">
-        <ul>
-          <li>Python (Pandas, Matplotlib, Scikit-learn)</li>
-          <br />
-          <li>
-            JavaScript
-            <a class="links" href="certificate\JavaScript_certificate.pdf" download>certificate</a>
-          </li>
-          <br />
-          <li>IN PROGRESS: React</li>
-          <br />
-          <li>IN PROGRESS: React Native</li>
-          <br />
-          <li>
-            Snowflake
-            <a class="links" href="certificate\Snowflake_certificate.pdf" download
-              >certificate</a> 
-          </li>
-          <br />
-          <li>
-            SQL (PostgreSQL)
-            <a class="links" href="certificate\SQL_certificate.pdf" download>certificate</a>
-          </li>
-          <br />
-          <li>Git</li>
-          <br />
-          <li>HTML, CSS</li>
-          <br />
-          <li>Fluent: German, English</li>
-          <br />
-          <li>Basics: Spanish, Norwegian</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="section--5">
-      <div class="section__title">
-        <h2 class="section__header">Example Data Science</h2>
-      </div>
-      <div class="Data Science Projects">
-        <ul>
-          <li><h3>Historical weather data analysis</h3></li>
-          <br />
-          <p>
-            <a
-              class="links"
-              href="https://p-heckmann-weather-home-deploy-pwgt2l.streamlit.app/"
-              target="_blank"
-              >Click here to go to the app</a
-            >
-          </p>
-          <br />
-          <p>
-            <a class="links" href="https://github.com/P-Heckmann/Weather/" target="_blank"
-              >Click here to go to the github repository</a
-            >
-          </p>
-          <br />
-          <p>
-            This streamlit app is based on publicly free available weather data
-            from the
-            <a class="links" href="https://www.dwd.de/EN/Home/home_node.html" target="_blank"
-              >German Meteorological Service</a
-            >
-            (Deutscher Wetterdienst) and a shapefile from the
-            <a class="links" href="https://www.bkg.bund.de/DE/Home/home.html" target="_blank"
-              >German Federal Agency for Cartography and Geodesy</a
-            >
-            (Bundesamt für Kartographie und Geodäsie). It offers an interactive
-            visualization of weather data from the different german states, in
-            terms of air temperature, precipitation and sunshine duration. The
-            main purpose of this project was to test the python libraries
-            <a class="links" href="https://geopandas.org/en/stable/" target="_blank"
-              >geopandas</a
-            >
-            in combination with the visualization library
-            <a class="links" href="https://matplotlib.org/" target="_blank">matplotlib</a> and
-            <a class="links" href="https://streamlit.io/" target="_blank">streamlit</a>.
-          </p>
-          <br />
-          <li><h3>Music Billboard 100 top-ten singles Audio Analysis</h3></li>
-          <br />
-          <p>
-            <a
-              class="links"
-              href="https://p-heckmann-spotify-home-deploy-qbxmxy.streamlit.app/"
-              target="_blank" >Click here to go to the app</a
-            >
-          </p>
-          <br />
-          <p>
-            <a class="links" href="https://github.com/P-Heckmann/Spotify/" target="_blank"
-              >Click here to go to the github repository</a
-            >
-          </p>
-          <br />
-          <p>
-            This project was inspired by a
-            <a
-              class="links"
-              href="https://blog.streamlit.io/find-the-top-songs-from-your-high-school-years-with-a-streamlit-app/" target="_blank"
-              >blog post</a
-            >
-            by Robert Ritz. In the blog post, Robert Ritz describes how one can
-            scrape the
-            <a
-              class="links"
-              href="https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles" target="_blank"
-              >Billboard Hot 100 top-ten singles</a
-            >
-            from wikipedia and utilise the Spotify API via
-            <a class="links" href="https://spotipy.readthedocs.io/en/2.22.1/" target="_blank"
-              >spotipy</a
-            >
-            to build an app where the user can choose the years to receive the
-            Spotify playlist link the the top songs of that years. In my
-            project, I started to utilise the Ritz's scaping function to get a
-            the data for the Billboard Hot 100 top-ten singles with the spotify
-            (uris) to later be merge the list with audio analytic data from the
-            spotify API via spotipy. The goal of the project is to see if
-            through the last decates one can see a change in the polular key or
-            beat-per-minute.
-          </p>
-          <br />
-          <li><h3>Fitness data visualization</h3></li>
-          <br />
-          <p>
-            <a
-              class="links"
-              href="https://p-heckmann-fitness-home-deploy-gdw23v.streamlit.app/" target="_blank"
-              >Click here to go to the app</a
-            >
-          </p>
-          <br />
-          <p>
-            <a class="links" href="https://github.com/P-Heckmann/Fitness/" target="_blank"
-              >Click here to go to the github repository</a
-            >
-          </p>
-          <br />
-          <p class="centered-text">
-            I recreated the fitness data display from Garmin Connect for this
-            project. The aim of this work was to learn how to dreat datatime
-            data and create interactive plots with the visualization library
-            <a class="links" href="https://altair-viz.github.io/" target="_blank" >altair</a>
-          </p>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="section--6">
-      <div class="section__title">
-        <h2 class="section__header">Web apps</h2>
-      </div>
-      <div class="Web_apps">
-        <ul>
-          <li>IN PROGRESS: Project 1</li>
-          <br />
-          <li>IN PROGRESS: Project 2</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="section--7">
-      <div class="section__title">
-        <h2 class="section__header">Interest</h2>
-      </div>
-      <div class="Interest">
-        <ul>
-          <li>Bouldering</li>
-          <br />
-          <li>Piano</li>
-          <br />
-          <li>Guitar</li>
-          <br />
-          <li>Biking</li>
-        </ul>
-      </div>
-    </section>
-    <section class="section" id="section--8">
-      <div class="section__title">
-        <!--         <h2 class="section__description">Contact</h2> -->
-        <h3 class="section__header">Contact</h3>
-      </div>
-      <div class="Contact">
-        <p>
-          <a class="links" href="https://github.com/P-Heckmann" target="_blank"> My GitHub</a>
-        </p>
-        <br />
-        <p>
-          <a
-            class="links"
-            href="https://www.linkedin.com/in/paul-heckmann-979904233/" target="_blank"
-          >
-            My LinkedIn</a
-          >
-        </p>
-        <br />
-        <p>
-          <a class="links" href="mailto:paul.he@posteo.de"
-            >­paul.he@posteo.de</a
-          >
-        </p>
-        <br />
-        <p>
-          <a class="links" href="cv\CV_english.pdf" download
-            >Download CV in English</a
-          >
-        </p>
-        <br />
-        <p>
-          <a class="links" href="cv\CV_deutsch.pdf" download
-            >Download CV in German</a
-          >
-        </p>
-        <br />
-      </div>
-    </section>
+  </div>
+</header>
 
     <footer class="footer">
       <p class="footer__copyright">
@@ -412,23 +132,5 @@
         </script>
       </p>
     </footer>
-
-    <div class="modal hidden">
-       <button class="btn--close-modal">&times;</button>
-             <h2 class="modal__header">
-         <br />
-         <span class="highlight"></span>
-      </h2>  
-             <form class="modal__form">
-        <label>First Name</label>
-        <input type="text" />
-        <label>Last Name</label>
-        <input type="text" />
-        <label>Email Address</label>
-        <input type="email" />
-        <button class="btn">Next step &rarr;</button>
-      </form> 
-    </div>
-    <div class="overlay hidden"></div>
   </body>
 </html>
