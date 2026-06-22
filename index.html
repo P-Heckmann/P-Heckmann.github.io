@@ -2,309 +2,318 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" type="image/png" href="images\favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paul Heckmann — Geoscience PhD working with data</title>
+    <meta
+      name="description"
+      content="Portfolio of Paul Heckmann: geoscience PhD with research publications and data science projects in weather, music, and fitness analytics."
+    />
+    <link rel="icon" type="image/png" href="images/favicon.ico" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
-    <title>Paul Heckmann / Data Scientist</title>
 
+    <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
   </head>
   <body>
-    <header class="header">
-      <nav class="nav">
-        <ul class="nav__links">
-          <li class="nav__item">
-            <a class="nav__link" href="#section--0">Home</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--1">About me</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--2">Research publications</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--5">Data Science Projects</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" href="#section--8">Contact</a>
-          </li>
+    <a href="#main" class="skip">Skip to content</a>
+
+    <aside class="strata" aria-hidden="true">
+      <ol class="strata__col">
+        <li>
+          <a href="#about" class="strata__layer" data-section="about" style="--c: #b6722e;">
+            <span>About</span>
+          </a>
+        </li>
+        <li>
+          <a href="#publications" class="strata__layer" data-section="publications" style="--c: #a07a52;">
+            <span>Publications</span>
+          </a>
+        </li>
+        <li>
+          <a href="#education" class="strata__layer" data-section="education" style="--c: #5a6878;">
+            <span>Education</span>
+          </a>
+        </li>
+        <li>
+          <a href="#projects" class="strata__layer" data-section="projects" style="--c: #5a6e4a;">
+            <span>Projects</span>
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="strata__layer" data-section="contact" style="--c: #7a3a2a;">
+            <span>Contact</span>
+          </a>
+        </li>
+      </ol>
+    </aside>
+
+    <header class="top">
+      <a href="#" class="top__name">Paul Heckmann</a>
+      <nav class="top__nav" aria-label="Primary">
+        <ul id="primary-menu">
+          <li><a href="#about">About</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
+        <button
+          class="top__toggle"
+          aria-expanded="false"
+          aria-controls="primary-menu"
+          aria-label="Menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
       </nav>
-
-      <nav class="navbar">
-        <div class="hamburger-menu">
-          <div class="line">
-            <a class="nav__link" href="#section--0">Home</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--1">About me</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--2">Research publications</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--5">Data Science Projects</a>
-          </div>
-          <div class="line">
-            <a class="nav__link" href="#section--7">Contact</a>
-          </div>
-        </div>
-      </nav>
-
-      <div class="header__title">
-        <h1>Welcome to my homepage</h1>
-        <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button>
-        <img src="images\profil_pic.png" class="header__img" alt="profil_pic" />
-      </div>
     </header>
 
-    <section class="section" id="section--1">
-      <div class="section__title">
-        <h2 class="section__header">About me</h2>
-      </div>
-      <div class="About me">
-        <p>
-          As a PhD candidate in geoscience about to graduate, I have discovered
-          my passion for data treatment and visualization. Throughout my
-          academic journey, I have gained a foundation in data analysis,
-          statistical methods, and programming. However, it was during my
-          graduate studies that I realized my interest in exploring and
-          visualizing data to uncover insights and patterns. I am passionate
-          about using data to solve real-world problems and creating insightful
-          visualizations that communicate complex data in a clear and
-          understandable way. This portfolio is a reflection of my expertise and
-          experience as a data scientist. It showcases some of my most
-          interesting projects and highlights my approach to data analysis and
-          visualization. I hope it provides you with insight into my
-          capabilities as a data scientist and inspires you to explore the vast
-          potential of data science.
-        </p>
-      </div>
-    </section>
+    <main id="main">
+      <section class="hero" id="top">
+        <p class="eyebrow">Portfolio · 2026</p>
+        <h1 class="hero__lede">
+          A geoscience PhD,<br />
+          <em>working with data</em>:<br />
+          analyzing patterns,<br />
+          building visualizations,<br />
+          asking better questions.
+        </h1>
+        <a href="#about" class="hero__cta">
+          <span>Read on</span>
+          <span aria-hidden="true">↓</span>
+        </a>
+      </section>
 
-    <section class="section" id="section--2">
-      <div class="section__title">
-        <h2 class="section__header">Research publications</h2>
-      </div>
-      <div class="Research publications">
-        <ul>
-          <li>
-            Heckmann, P., Palinkaš, S. S., Hansen, H., Iacono-Marziano, G.,
-            Rajič, K., Forien, M., and Bergh, S. G.: Petrogenesis of zoned and
-            unzoned mafic pegmatites: An insight from the Palaeoproterozoic
-            mafic-ultramafic Hamn intrusion, Northern Norway, Lithos, 428,
-            106818, 2022.
-            <a class="links" href="https://doi.org/10.1016/j.lithos.2022.106818"
-              >https://doi.org/10.1016/j.lithos.2022.106818</a
-            >
-          </li>
-          <br />
-          <li>
-            Heckmann, P., Iacono-Marziano, G., and Strmić Palinkaš, S.: An
-            experimental study of the effect of water and chlorine on
-            plagioclase nucleation and growth in mafic magmas: application to
-            mafic pegmatites, European Journal of Mineralogy, 35, 1111–1124,
-            2023.
-            <a class="links" href="https://doi.org/10.5194/ejm-35-1111-2023"
-              >https://doi.org/10.5194/ejm-35-1111-2023</a
-            >
-          </li>
-          <br />
-          <li>
-            Heckmann, et al., Sulfur isotopes, trace element, and textural
-            analyses of base metal sulfides Paleoproterozoic mafic ultramafic
-            Hamn intrusion Northern Norway (in progress)
-          </li>
-          <br />
-          <li>Heckmann, et al., Petrology Multimeter (in progress)</li>
-        </ul>
-      </div>
-    </section>
+      <section class="section" id="about">
+        <header class="section__head">
+          <p class="section__num">01 — About</p>
+          <h2 class="section__h">A short introduction.</h2>
+        </header>
+        <div class="section__body about">
+          <div class="about__text">
+            <p>
+              I'm finishing a PhD in geoscience at UiT The Arctic University of
+              Norway, with a dissertation on the petrogenesis of mafic
+              pegmatites in Northern Norway.
+            </p>
+            <p>
+              Along the way I've fallen for the work that surrounds the
+              science: cleaning messy datasets, finding patterns, and building
+              visualizations that make complex data legible to other people.
+              This site collects published research alongside small data
+              projects I've built — partly to learn new tools, partly to see
+              how the methods I use on geochemistry translate to other
+              domains.
+            </p>
+          </div>
+          <figure class="about__photo">
+            <img src="images/profil_pic.png" alt="Portrait of Paul Heckmann" />
+          </figure>
+        </div>
+      </section>
 
-    <section class="section" id="section--3">
-      <div class="section__title">
-        <h2 class="section__header">Education</h2>
-      </div>
-      <div class="operations__tab-container"></div>
-      <div class="Education">
-        <ul>
-          <li>
-            Research Stay at Insitut des Sciences de la Terra d'Orleans, France
-          </li>
-          <br />
-          <li>PhD Candidate at UiT The Arctic University of Norway</li>
-          <br />
-          <li>
-            Master of Science in Geosciences from Georg-August-Universität
-            Göttingen
-          </li>
-          <br />
-          <li>
-            Bachelor of Science in Geosciences from Georg-August-Universität
-            Göttingen (with distinction)
-          </li>
-        </ul>
-      </div>
-    </section>
+      <section class="section" id="publications">
+        <header class="section__head">
+          <p class="section__num">02 — Publications</p>
+          <h2 class="section__h">Peer-reviewed research.</h2>
+        </header>
+        <div class="section__body">
+          <ol class="papers">
+            <li class="paper">
+              <p class="paper__meta">
+                <span class="paper__year">2023</span>
+                <span class="paper__venue">European Journal of Mineralogy</span>
+              </p>
+              <p class="paper__title">
+                An experimental study of the effect of water and chlorine on
+                plagioclase nucleation and growth in mafic magmas: application
+                to mafic pegmatites.
+              </p>
+              <p class="paper__authors">
+                Heckmann, P., Iacono-Marziano, G., and Strmić Palinkaš, S.
+              </p>
+              <a
+                class="paper__link"
+                href="https://doi.org/10.5194/ejm-35-1111-2023"
+              >
+                doi.org/10.5194/ejm-35-1111-2023 ↗
+              </a>
+            </li>
 
-    <section class="section" id="section--5">
-      <div class="section__title">
-        <h2 class="section__header">Example Data Science</h2>
-      </div>
-      <div class="Data Science Projects">
-        <ul>
-          <li><h3>Historical weather data analysis</h3></li>
-          <br />
-          <p>
-            <a
-              class="links"
-              href="https://p-heckmann-weather-home-deploy-pwgt2l.streamlit.app/"
-              >Click here to go to the app</a
-            >
-          </p>
-          <br />
-          <p>
-            <a class="links" href="https://github.com/P-Heckmann/Weather/"
-              >Click here to go to the github repository</a
-            >
-          </p>
-          <br />
-          <p>
-            This streamlit app is based on publicly free available weather data
-            from the
-            <a class="links" href="https://www.dwd.de/EN/Home/home_node.html"
-              >German Meteorological Service</a
-            >
-            (Deutscher Wetterdienst) and a shapefile from the
-            <a class="links" href="https://www.bkg.bund.de/DE/Home/home.html"
-              >German Federal Agency for Cartography and Geodesy</a
-            >
-            (Bundesamt für Kartographie und Geodäsie). It offers an interactive
-            visualization of weather data from the different german states, in
-            terms of air temperature, precipitation and sunshine duration. The
-            main purpose of this project was to test the python libraries
-            <a class="links" href="https://geopandas.org/en/stable/"
-              >geopandas</a
-            >
-            in combination with the visualization library
-            <a class="links" href="https://matplotlib.org/">matplotlib</a> and
-            <a class="links" href="https://streamlit.io/">streamlit</a>.
-          </p>
-          <br />
-          <li><h3>Music Billboard 100 top-ten singles Audio Analysis</h3></li>
-          <br />
-          <p>
-            <a
-              class="links"
-              href="https://p-heckmann-spotify-home-deploy-qbxmxy.streamlit.app/"
-              >Click here to go to the app</a
-            >
-          </p>
-          <br />
-          <p>
-            <a class="links" href="https://github.com/P-Heckmann/Spotify/"
-              >Click here to go to the github repository</a
-            >
-          </p>
-          <br />
-          <p>
-            This project was inspired by a
-            <a
-              class="links"
-              href="https://blog.streamlit.io/find-the-top-songs-from-your-high-school-years-with-a-streamlit-app/"
-              >blog post</a
-            >
-            by Robert Ritz. In the blog post, Robert Ritz describes how one can
-            scrape the
-            <a
-              class="links"
-              href="https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles"
-              >Billboard Hot 100 top-ten singles</a
-            >
-            from wikipedia and utilise the Spotify API via
-            <a class="links" href="https://spotipy.readthedocs.io/en/2.22.1/"
-              >spotipy</a
-            >
-            to build an app where the user can choose the years to receive the
-            Spotify playlist link the the top songs of that years. In my
-            project, I started to utilise the Ritz's scaping function to get a
-            the data for the Billboard Hot 100 top-ten singles with the spotify
-            (uris) to later be merge the list with audio analytic data from the
-            spotify API via spotipy. The goal of the project is to see if
-            through the last decates one can see a change in the polular key or
-            beat-per-minute.
-          </p>
-          <br />
-          <li><h3>Fitness data visualization</h3></li>
-          <br />
-          <p>
-            <a
-              class="links"
-              href="https://p-heckmann-fitness-home-deploy-gdw23v.streamlit.app/"
-              >Click here to go to the app</a
-            >
-          </p>
-          <br />
-          <p>
-            <a class="links" href="https://github.com/P-Heckmann/Fitness/"
-              >Click here to go to the github repository</a
-            >
-          </p>
-          <br />
-          <p class="centered-text">
-            I recreated the fitness data display from Garmin Connect for this
-            project. The aim of this work was to learn how to dreat datatime
-            data and create interactive plots with the visualization library
-            <a class="links" href="https://altair-viz.github.io/">altair</a>
-          </p>
-        </ul>
-      </div>
-    </section>
-    <section class="section" id="section--8">
-      <div class="section__title">
-        <!--         <h2 class="section__description">Contact</h2> -->
-        <h3 class="section__header">Contact</h3>
-      </div>
-      <div class="Contact">
-        <p>
-          <a class="links" href="mailto:paul.he@posteo.de"
-            >­paul.he@posteo.de</a
-          >
-        </p>
-      </div>
-    </section>
+            <li class="paper">
+              <p class="paper__meta">
+                <span class="paper__year">2022</span>
+                <span class="paper__venue">Lithos</span>
+              </p>
+              <p class="paper__title">
+                Petrogenesis of zoned and unzoned mafic pegmatites: an insight
+                from the Palaeoproterozoic mafic-ultramafic Hamn intrusion,
+                Northern Norway.
+              </p>
+              <p class="paper__authors">
+                Heckmann, P., Strmić Palinkaš, S., Hansen, H., Iacono-Marziano,
+                G., Rajič, K., Forien, M., and Bergh, S. G.
+              </p>
+              <a
+                class="paper__link"
+                href="https://doi.org/10.1016/j.lithos.2022.106818"
+              >
+                doi.org/10.1016/j.lithos.2022.106818 ↗
+              </a>
+            </li>
 
-    <footer class="footer">
-      <p class="footer__copyright">
-        &copy; Copyright by Paul Heckmann
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-      </p>
+            <li class="paper paper--wip">
+              <p class="paper__meta">
+                <span class="paper__year">In progress</span>
+              </p>
+              <p class="paper__title">
+                Sulfur isotopes, trace element, and textural analyses of base
+                metal sulfides — Paleoproterozoic mafic-ultramafic Hamn
+                intrusion, Northern Norway.
+              </p>
+              <p class="paper__authors">Heckmann, et al.</p>
+            </li>
+
+            <li class="paper paper--wip">
+              <p class="paper__meta">
+                <span class="paper__year">In progress</span>
+              </p>
+              <p class="paper__title">Petrology Multimeter.</p>
+              <p class="paper__authors">Heckmann, et al.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="education">
+        <header class="section__head">
+          <p class="section__num">03 — Education</p>
+          <h2 class="section__h">Training.</h2>
+        </header>
+        <div class="section__body">
+          <ol class="edu">
+            <li class="edu__item">
+              <p class="edu__where">Institut des Sciences de la Terre d'Orléans</p>
+              <p class="edu__what">Research stay · France</p>
+            </li>
+            <li class="edu__item">
+              <p class="edu__where">UiT The Arctic University of Norway</p>
+              <p class="edu__what">PhD candidate, Geoscience</p>
+            </li>
+            <li class="edu__item">
+              <p class="edu__where">Georg-August-Universität Göttingen</p>
+              <p class="edu__what">M.Sc. Geosciences</p>
+            </li>
+            <li class="edu__item">
+              <p class="edu__where">Georg-August-Universität Göttingen</p>
+              <p class="edu__what">B.Sc. Geosciences · with distinction</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <header class="section__head">
+          <p class="section__num">04 — Projects</p>
+          <h2 class="section__h">Data work, in public.</h2>
+        </header>
+        <div class="section__body">
+          <ol class="projects">
+            <li class="project">
+              <p class="project__tag">Streamlit · Geopandas · Matplotlib</p>
+              <h3 class="project__title">Historical weather, mapped by Land.</h3>
+              <p class="project__desc">
+                An interactive visualization of German weather data — air
+                temperature, precipitation, sunshine duration — by federal
+                state, using open data from the
+                <a href="https://www.dwd.de/EN/Home/home_node.html">Deutscher Wetterdienst</a>
+                and shapefiles from the
+                <a href="https://www.bkg.bund.de/DE/Home/home.html">Bundesamt für Kartographie und Geodäsie</a>.
+                Mostly an exercise in pairing
+                <a href="https://geopandas.org/en/stable/">GeoPandas</a> with
+                <a href="https://matplotlib.org/">matplotlib</a> inside a
+                <a href="https://streamlit.io/">Streamlit</a> app.
+              </p>
+              <p class="project__links">
+                <a class="cta" href="https://p-heckmann-weather-home-deploy-pwgt2l.streamlit.app/">
+                  Open app ↗
+                </a>
+                <a class="cta cta--ghost" href="https://github.com/P-Heckmann/Weather/">
+                  Source ↗
+                </a>
+              </p>
+            </li>
+
+            <li class="project">
+              <p class="project__tag">Spotify API · Web scraping · Pandas</p>
+              <h3 class="project__title">Billboard top-ten, sixty years of audio features.</h3>
+              <p class="project__desc">
+                Inspired by a
+                <a href="https://blog.streamlit.io/find-the-top-songs-from-your-high-school-years-with-a-streamlit-app/">
+                  blog post by Robert Ritz</a>, this project scrapes
+                <a href="https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles">
+                  Billboard Hot 100 top-ten singles</a>
+                from Wikipedia, then pulls audio analysis from the Spotify API
+                via <a href="https://spotipy.readthedocs.io/en/2.22.1/">spotipy</a>.
+                The question: do the most popular keys and tempos shift
+                across decades?
+              </p>
+              <p class="project__links">
+                <a class="cta" href="https://p-heckmann-spotify-home-deploy-qbxmxy.streamlit.app/">
+                  Open app ↗
+                </a>
+                <a class="cta cta--ghost" href="https://github.com/P-Heckmann/Spotify/">
+                  Source ↗
+                </a>
+              </p>
+            </li>
+
+            <li class="project">
+              <p class="project__tag">Altair · Datetime · Streamlit</p>
+              <h3 class="project__title">Fitness data, rebuilt from Garmin Connect.</h3>
+              <p class="project__desc">
+                A reconstruction of the fitness data displays from Garmin
+                Connect, built mostly to practice handling datetime data and
+                making interactive plots with
+                <a href="https://altair-viz.github.io/">Altair</a>.
+              </p>
+              <p class="project__links">
+                <a class="cta" href="https://p-heckmann-fitness-home-deploy-gdw23v.streamlit.app/">
+                  Open app ↗
+                </a>
+                <a class="cta cta--ghost" href="https://github.com/P-Heckmann/Fitness/">
+                  Source ↗
+                </a>
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section section--contact" id="contact">
+        <header class="section__head">
+          <p class="section__num">05 — Contact</p>
+          <h2 class="section__h">
+            Looking for a data-minded scientist? <em>Get in touch.</em>
+          </h2>
+        </header>
+        <div class="section__body contact">
+          <a class="contact__link" href="mailto:paul.he@posteo.de">
+            paul.he@posteo.de ↗
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>© <span id="year"></span> Paul Heckmann</p>
+      <p class="foot__meta">Built with HTML, CSS, and a small amount of JavaScript.</p>
     </footer>
-
-    <div class="modal hidden">
-      <button class="btn--close-modal">&times;</button>
-      <h2 class="modal__header">
-        <br />
-        <span class="highlight"></span>
-      </h2>
-      <form class="modal__form">
-        <label>First Name</label>
-        <input type="text" />
-        <label>Last Name</label>
-        <input type="text" />
-        <label>Email Address</label>
-        <input type="email" />
-        <button class="btn">Next step &rarr;</button>
-      </form>
-    </div>
-    <div class="overlay hidden"></div>
   </body>
 </html>
