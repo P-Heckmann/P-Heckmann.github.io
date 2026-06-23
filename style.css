@@ -1,19 +1,33 @@
 /* =====================================================
    Paul Heckmann — Portfolio
-   Design tokens
+   Retro-70s palette, dark mode
    ===================================================== */
 
 :root {
-  /* Palette — sampled from sedimentary and igneous mineralogy */
-  --paper: #f4f0e8;
-  --paper-deep: #ebe4d3;
-  --ink: #1b1916;
-  --ink-soft: #2d2a25;
-  --muted: #6e6557;
-  --rule: #d4cbb8;
-  --ochre: #b6722e;
-  --ochre-deep: #8a531d;
-  --rust: #7a2e1c;
+  /* Surfaces */
+  --bg: #050d14;
+  --bg-elevated: #0a1822;
+  --ink: #f4ede0;
+  --ink-soft: #c8c0b1;
+  --muted: #807a6f;
+  --rule: rgba(244, 237, 224, 0.1);
+  --rule-strong: rgba(244, 237, 224, 0.2);
+
+  /* The palette */
+  --c-teal: #337a88;
+  --c-teal-green: #448e8a;
+  --c-mauve: #9e68a8;
+  --c-purple: #772e84;
+  --c-red: #800f0b;
+  --c-red-dark: #67070d;
+  --c-navy: #04304f;
+  --c-navy-deep: #02445e;
+
+  /* Functional */
+  --accent: #800f0b;
+  --accent-soft: #9e68a8;
+  --link: #9e68a8;
+  --link-hover: #f4ede0;
 
   /* Type */
   --display: "Instrument Serif", "Times New Roman", Georgia, serif;
@@ -28,6 +42,16 @@
 
   /* Motion */
   --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+
+  /* Multi-color stripe band used as section divider */
+  --stripe-band: linear-gradient(
+    to right,
+    var(--c-teal) 0 20%,
+    var(--c-teal-green) 20% 40%,
+    var(--c-mauve) 40% 60%,
+    var(--c-red) 60% 80%,
+    var(--c-red-dark) 80% 100%
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -64,13 +88,11 @@ body {
   font-family: var(--body);
   font-weight: 400;
   color: var(--ink);
-  background-color: var(--paper);
+  background-color: var(--bg);
   line-height: 1.6;
   font-size: 1.0625rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Subtle paper grain via SVG noise */
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.025 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
 }
 
 img {
@@ -80,27 +102,29 @@ img {
 }
 
 a {
-  color: var(--ochre-deep);
+  color: var(--link);
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-  transition: color 0.2s var(--ease);
+  text-underline-offset: 0.22em;
+  text-decoration-color: rgba(158, 104, 168, 0.4);
+  transition: color 0.2s var(--ease), text-decoration-color 0.2s var(--ease);
 }
 
 a:hover {
-  color: var(--rust);
+  color: var(--link-hover);
+  text-decoration-color: var(--link-hover);
 }
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--ochre);
+  outline: 2px solid var(--c-mauve);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 ::selection {
-  background: var(--ochre);
-  color: var(--paper);
+  background: var(--c-red);
+  color: var(--ink);
 }
 
 /* =====================================================
@@ -112,7 +136,7 @@ button:focus-visible {
   top: -100px;
   left: 1rem;
   background: var(--ink);
-  color: var(--paper);
+  color: var(--bg);
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
   text-decoration: none;
@@ -125,7 +149,7 @@ button:focus-visible {
 }
 
 /* =====================================================
-   Stratigraphic column (the signature element)
+   Stratigraphic column → flat stripe column
    ===================================================== */
 
 .strata {
@@ -151,75 +175,52 @@ button:focus-visible {
   position: relative;
 }
 
+/* Flat blocks of palette color. The inline --c on each layer is overridden
+   here so we don't need to touch the HTML. */
+.strata__layer[data-section="about"] { background-color: var(--c-teal); }
+.strata__layer[data-section="publications"] { background-color: var(--c-teal-green); }
+.strata__layer[data-section="education"] { background-color: var(--c-mauve); }
+.strata__layer[data-section="projects"] { background-color: var(--c-red); }
+.strata__layer[data-section="contact"] { background-color: var(--c-red-dark); }
+
 .strata__layer {
   pointer-events: auto;
   display: block;
   width: 100%;
   height: 100%;
-  background-color: var(--c);
   text-decoration: none;
   position: relative;
   transition: filter 0.3s var(--ease);
   overflow: hidden;
 }
 
-/* Mineral textures — subtle, only on hover or active */
+/* Subtle sheen so the stripes feel slightly dimensional —
+   like 70s screenprinted ink rather than flat web color */
 .strata__layer::before {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.4;
-  mix-blend-mode: multiply;
-}
-
-.strata__layer[data-section="publications"]::before {
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent 0,
-    transparent 4px,
-    rgba(0, 0, 0, 0.25) 4px,
-    rgba(0, 0, 0, 0.25) 5px
-  );
-}
-.strata__layer[data-section="education"]::before {
-  background-image: radial-gradient(rgba(0, 0, 0, 0.3) 1px, transparent 1.5px);
-  background-size: 7px 7px;
-}
-.strata__layer[data-section="projects"]::before {
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent 0,
-    transparent 5px,
-    rgba(0, 0, 0, 0.2) 5px,
-    rgba(0, 0, 0, 0.2) 6px
-  );
-}
-.strata__layer[data-section="about"]::before {
-  background-image: radial-gradient(rgba(0, 0, 0, 0.18) 0.5px, transparent 1px);
-  background-size: 3px 3px;
-}
-.strata__layer[data-section="contact"]::before {
   background-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.15),
-    transparent 40%
+    to right,
+    rgba(0, 0, 0, 0.18),
+    rgba(255, 255, 255, 0.06) 35%,
+    rgba(0, 0, 0, 0.22)
   );
+  pointer-events: none;
 }
 
-/* Label slides out on hover */
 .strata__layer span {
   position: absolute;
   left: calc(100% + 12px);
   top: 50%;
-  transform: translateY(-50%);
   font-family: var(--mono);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
-  background: var(--paper);
+  color: var(--ink);
+  background: var(--bg-elevated);
   padding: 0.35rem 0.75rem;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--rule-strong);
   white-space: nowrap;
   opacity: 0;
   transform: translateY(-50%) translateX(-8px);
@@ -234,7 +235,7 @@ button:focus-visible {
 }
 
 .strata__layer:hover {
-  filter: brightness(1.08);
+  filter: brightness(1.15) saturate(1.1);
 }
 
 .strata__layer.is-active::after {
@@ -244,7 +245,7 @@ button:focus-visible {
   top: 50%;
   transform: translateY(-50%);
   width: 6px;
-  height: 24px;
+  height: 28px;
   background: var(--ink);
 }
 
@@ -270,9 +271,9 @@ button:focus-visible {
   justify-content: space-between;
   padding: 1.25rem var(--gutter);
   padding-left: calc(var(--strata-w) + var(--gutter));
-  background: color-mix(in srgb, var(--paper) 92%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.3s var(--ease);
 }
@@ -352,7 +353,7 @@ button:focus-visible {
     left: 0;
     right: 0;
     flex-direction: column;
-    background: var(--paper);
+    background: var(--bg-elevated);
     border-bottom: 1px solid var(--rule);
     padding: 1rem var(--gutter) 1.5rem;
     gap: 1rem;
@@ -381,7 +382,7 @@ main {
 }
 
 /* =====================================================
-   Hero
+   Hero — diagonal converging stripe element
    ===================================================== */
 
 .hero {
@@ -426,7 +427,7 @@ main {
 
 .hero__lede em {
   font-style: italic;
-  color: var(--ochre-deep);
+  color: var(--c-red);
 }
 
 .hero__cta {
@@ -443,6 +444,11 @@ main {
   border-bottom: 1px solid var(--ink);
   align-self: flex-start;
   animation: rise 0.9s 0.2s var(--ease) both;
+}
+
+.hero__cta:hover {
+  color: var(--c-mauve);
+  border-bottom-color: var(--c-mauve);
 }
 
 .hero__cta span:last-child {
@@ -465,11 +471,23 @@ main {
 }
 
 /* =====================================================
-   Section scaffolding
+   Section scaffolding — stripe band as divider
    ===================================================== */
 
 .section {
-  border-top: 1px solid var(--rule);
+  border-top: none;
+  position: relative;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--stripe-band);
+  opacity: 0.85;
 }
 
 .section__head {
@@ -481,9 +499,15 @@ main {
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ochre-deep);
   margin-bottom: 1.5rem;
 }
+
+/* Each section's number tinted to match its strata layer */
+#about .section__num { color: var(--c-teal); }
+#publications .section__num { color: var(--c-teal-green); }
+#education .section__num { color: var(--c-mauve); }
+#projects .section__num { color: var(--c-red); }
+#contact .section__num { color: var(--c-red-dark); }
 
 .section__h {
   font-family: var(--display);
@@ -497,7 +521,7 @@ main {
 
 .section__h em {
   font-style: italic;
-  color: var(--ochre-deep);
+  color: var(--c-red);
 }
 
 .section__body {
@@ -534,7 +558,9 @@ main {
 
 .about__photo img {
   width: 100%;
-  filter: grayscale(0.15) contrast(1.02);
+  /* Desaturated and slightly darkened — feels intentional against the
+     saturated palette rather than competing with it */
+  filter: grayscale(0.5) contrast(1.05) brightness(0.95);
   border-radius: 2px;
 }
 
@@ -579,7 +605,7 @@ main {
 }
 
 .paper--wip .paper__year {
-  color: var(--rust);
+  color: var(--c-red);
 }
 
 .paper__venue::before {
@@ -659,7 +685,7 @@ main {
 }
 
 /* =====================================================
-   Projects
+   Projects — colored bars rotate through palette
    ===================================================== */
 
 .projects {
@@ -682,9 +708,12 @@ main {
   left: 0;
   top: 0.4rem;
   bottom: 0.4rem;
-  width: 2px;
-  background: var(--ochre);
+  width: 3px;
 }
+
+.project:nth-child(1)::before { background: var(--c-teal); }
+.project:nth-child(2)::before { background: var(--c-mauve); }
+.project:nth-child(3)::before { background: var(--c-red); }
 
 .project__tag {
   font-family: var(--mono);
@@ -722,16 +751,16 @@ main {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--paper);
-  background: var(--ink);
+  color: var(--ink);
+  background: var(--c-red);
   padding: 0.85rem 1.25rem;
   display: inline-block;
   transition: background 0.2s var(--ease), color 0.2s var(--ease);
 }
 
 .cta:hover {
-  background: var(--ochre-deep);
-  color: var(--paper);
+  background: var(--c-red-dark);
+  color: var(--ink);
 }
 
 .cta--ghost {
@@ -742,7 +771,7 @@ main {
 
 .cta--ghost:hover {
   background: var(--ink);
-  color: var(--paper);
+  color: var(--bg);
 }
 
 /* =====================================================
@@ -758,25 +787,25 @@ main {
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   color: var(--ink);
   text-decoration: none;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule-strong);
   padding-bottom: 0.25rem;
   transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
   display: inline-block;
 }
 
 .contact__link:hover {
-  color: var(--ochre-deep);
-  border-bottom-color: var(--ochre-deep);
+  color: var(--c-mauve);
+  border-bottom-color: var(--c-mauve);
 }
 
 /* =====================================================
-   Footer
+   Footer — multi-color stripe band on top edge
    ===================================================== */
 
 .foot {
   padding: 3rem var(--gutter);
   padding-left: calc(var(--strata-w) + var(--gutter));
-  border-top: 1px solid var(--rule);
+  border-top: none;
   font-family: var(--mono);
   font-size: 0.75rem;
   letter-spacing: 0.05em;
@@ -785,6 +814,18 @@ main {
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: space-between;
+  position: relative;
+  background: var(--bg-elevated);
+}
+
+.foot::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: var(--stripe-band);
 }
 
 @media (max-width: 800px) {
