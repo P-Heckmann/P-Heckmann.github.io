@@ -4,37 +4,69 @@
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-/* Mobile nav toggle */
-const toggle = document.querySelector(".top__toggle");
-const navWrap = document.querySelector(".top__nav");
+/* =====================================================
+   Mobile nav toggle
+   ===================================================== */
 
-if (toggle && navWrap) {
-  toggle.addEventListener("click", () => {
-    const open = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!open));
-    navWrap.setAttribute("data-open", String(!open));
+const toggleBtn = document.querySelector(".top__toggle");
+const navEl = document.querySelector(".top__nav");
+
+if (toggleBtn && navEl) {
+  const setMenu = (open) => {
+    toggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    navEl.setAttribute("data-open", open ? "true" : "false");
+  };
+
+  // Explicit initial state, in case the HTML attribute drifts
+  setMenu(false);
+
+  toggleBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = toggleBtn.getAttribute("aria-expanded") === "true";
+    setMenu(!isOpen);
   });
 
-  // Close on link click
-  navWrap.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", () => {
-      toggle.setAttribute("aria-expanded", "false");
-      navWrap.setAttribute("data-open", "false");
-    });
+  // Close on menu link click
+  navEl.querySelectorAll("ul a").forEach((a) => {
+    a.addEventListener("click", () => setMenu(false));
+  });
+
+  // Close when clicking/tapping outside the open menu
+  document.addEventListener("click", (e) => {
+    if (navEl.getAttribute("data-open") !== "true") return;
+    if (navEl.contains(e.target) || toggleBtn.contains(e.target)) return;
+    setMenu(false);
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && navEl.getAttribute("data-open") === "true") {
+      setMenu(false);
+      toggleBtn.focus();
+    }
   });
 }
 
-/* "Stuck" state on the top bar — adds a hairline border after scroll */
-const top = document.querySelector(".top");
+/* =====================================================
+   Sticky bar hairline border once scrolled
+   ===================================================== */
+
+// Note: variable deliberately named topBar — `top` collides with
+// window.top in some browsers and can break top-level const declarations
+const topBar = document.querySelector(".top");
 const onScroll = () => {
-  if (!top) return;
-  if (window.scrollY > 24) top.classList.add("is-stuck");
-  else top.classList.remove("is-stuck");
+  if (!topBar) return;
+  if (window.scrollY > 24) topBar.classList.add("is-stuck");
+  else topBar.classList.remove("is-stuck");
 };
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
-/* Active section: highlight strata layer + top-nav link */
+/* =====================================================
+   Active section highlighting (strata + top-nav)
+   ===================================================== */
+
 const sections = document.querySelectorAll("main section[id]");
 const strataLinks = document.querySelectorAll(".strata__layer");
 const navLinks = document.querySelectorAll(".top__nav a");
@@ -52,7 +84,6 @@ const setActive = (id) => {
 if ("IntersectionObserver" in window && sections.length) {
   const io = new IntersectionObserver(
     (entries) => {
-      // Pick the entry with the largest intersection ratio that's intersecting
       const visible = entries
         .filter((e) => e.isIntersecting)
         .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
