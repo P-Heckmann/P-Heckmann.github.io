@@ -315,53 +315,93 @@ button:focus-visible {
 .top__toggle {
   display: none;
   background: none;
-  border: none;
+  border: 1px solid var(--rule-strong);
   cursor: pointer;
-  padding: 0.5rem;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.top__toggle:hover {
+  border-color: var(--ink);
+  background: rgba(244, 237, 224, 0.05);
 }
 
 .top__toggle span {
   display: block;
-  width: 22px;
-  height: 1.5px;
+  width: 20px;
+  height: 1.75px;
   background: var(--ink);
   transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
 }
 
 .top__toggle[aria-expanded="true"] span:nth-child(1) {
-  transform: translateY(6.5px) rotate(45deg);
+  transform: translateY(6.75px) rotate(45deg);
 }
 .top__toggle[aria-expanded="true"] span:nth-child(2) {
   opacity: 0;
 }
 .top__toggle[aria-expanded="true"] span:nth-child(3) {
-  transform: translateY(-6.5px) rotate(-45deg);
+  transform: translateY(-6.75px) rotate(-45deg);
 }
 
 @media (max-width: 800px) {
   .top {
     padding-left: var(--gutter);
   }
+
+  /* Stripe band along the bottom of the mobile header — gives the
+     navigation bar a visible identity that matches the section dividers */
+  .top::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--stripe-band);
+  }
+
   .top__toggle {
     display: flex;
   }
+
   .top__nav ul {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 3px);
     left: 0;
     right: 0;
     flex-direction: column;
     background: var(--bg-elevated);
     border-bottom: 1px solid var(--rule);
-    padding: 1rem var(--gutter) 1.5rem;
-    gap: 1rem;
-    transform: translateY(-110%);
-    transition: transform 0.3s var(--ease);
+    padding: 1.25rem var(--gutter) 1.5rem;
+    gap: 1.25rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease),
+      visibility 0s linear 0.25s;
   }
+
   .top__nav[data-open="true"] ul {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
     transform: translateY(0);
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease),
+      visibility 0s linear 0s;
+  }
+
+  .top__nav ul a {
+    font-size: 0.85rem;
+    padding: 0.25rem 0;
+    display: block;
   }
 }
 
